@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SaleManager</string>
+    <string name="splash_screen_et_hint">Please input your name !</string>
+    <string name="splash_screen_confirm">Confirm</string>
+</resources>
