@@ -50,4 +50,17 @@ public class SplashScreen extends AppCompatActivity {
         }
         fragmentNavigator.setRootFragment(fragment);
     }
+
+    @Override
+    public void onBackPressed() {
+        if(fragmentNavigator.getActiveFragment() instanceof FragmentMain ||
+                fragmentNavigator.getActiveFragment() instanceof FragmentStart){
+            exitApp();
+        }
+    }
+
+    private void exitApp(){
+        this.finish();
+        System.exit(0);
+    }
 }

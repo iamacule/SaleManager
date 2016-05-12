@@ -2,4 +2,8 @@
     <string name="app_name">SaleManager</string>
     <string name="splash_screen_et_hint">Please input your name !</string>
     <string name="splash_screen_confirm">Confirm</string>
+    <string name="toast_save_success">Save success</string>
+    <string name="private_">Personal</string>
+    <string name="company">Company</string>
+    <string name="bill">Bill</string>
 </resources>

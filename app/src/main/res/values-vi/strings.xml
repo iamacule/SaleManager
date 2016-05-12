@@ -3,4 +3,7 @@
     <string name="splash_screen_et_hint">Vui lòng nhập tên của bạn !</string>
     <string name="splash_screen_confirm">Xác nhận</string>
     <string name="toast_save_success">Lưu thành công</string>
+    <string name="private_">Cá nhân</string>
+    <string name="company">Công ty</string>
+    <string name="bill">Hóa đơn</string>
 </resources>
