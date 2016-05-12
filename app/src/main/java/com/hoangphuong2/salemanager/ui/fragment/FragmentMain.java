@@ -1,5 +1,6 @@
 package com.hoangphuong2.salemanager.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.hoangphuong2.salemanager.R;
+import com.hoangphuong2.salemanager.ui.activity.PrivateActivity;
 import com.hoangphuong2.salemanager.ui.control.OnSingleClickListener;
 
 /**
@@ -18,6 +20,7 @@ public class FragmentMain extends Fragment {
     private ImageButton btnPrivate;
     private ImageButton btnCompany;
     private ImageButton btnBill;
+    private Intent intent;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class FragmentMain extends Fragment {
             public void onSingleClick(View v) {
                 switch (v.getId()){
                     case R.id.imgPrivate:
+                        intent = new Intent(getActivity(), PrivateActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.imgCompany:
                         break;
