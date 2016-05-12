@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.hoangphuong2.salemanager.R;
+import com.hoangphuong2.salemanager.ui.activity.BillActivity;
+import com.hoangphuong2.salemanager.ui.activity.CompanyActivity;
 import com.hoangphuong2.salemanager.ui.activity.PrivateActivity;
 import com.hoangphuong2.salemanager.ui.control.OnSingleClickListener;
 
@@ -47,8 +49,12 @@ public class FragmentMain extends Fragment {
                         startActivity(intent);
                         break;
                     case R.id.imgCompany:
+                        intent = new Intent(getActivity(), CompanyActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.imgBill:
+                        intent = new Intent(getActivity(), BillActivity.class);
+                        startActivity(intent);
                         break;
                 }
             }
