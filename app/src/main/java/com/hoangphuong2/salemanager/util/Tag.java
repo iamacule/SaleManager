@@ -10,4 +10,5 @@ public class Tag {
     public static final String FragmentPrivate = "FragmentPrivate";
     public static final String FragmentCompany = "FragmentCompany";
     public static final String FragmentBill = "FragmentBill";
+    public static final String Database = "Database";
 }

@@ -4,17 +4,21 @@ package com.hoangphuong2.salemanager.model;
  * Created by MrAn on 13-May-16.
  */
 public class Private {
-    String name;
+    public int idPrivate;
+    public String name;
+    public String address;
+    public String email;
+    public String note;
+    public int sex;
+    public int idCompany;
 
-    public Private(String name) {
+    public Private(int idPrivate,String name, String address, String email, String note, int sex, int idCompany) {
+        this.idPrivate = idPrivate;
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.note = note;
+        this.sex = sex;
+        this.idCompany = idCompany;
     }
 }
