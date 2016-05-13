@@ -12,7 +12,10 @@ public class Private {
     public int sex;
     public int idCompany;
 
-    public Private(int idPrivate,String name, String address, String email, String note, int sex, int idCompany) {
+    public Private() {
+    }
+
+    public Private(int idPrivate, String name, String address, String email, String note, int sex, int idCompany) {
         this.idPrivate = idPrivate;
         this.name = name;
         this.address = address;

@@ -7,14 +7,14 @@ public class Item {
     public int idItem;
     public String name;
     public int idItemType;
-    public String price;
+    public String specifications;
     public String note;
 
-    public Item(int idItem, String name, int idItemType, String price, String note) {
+    public Item(int idItem, String name, int idItemType, String specifications, String note) {
         this.idItem = idItem;
         this.name = name;
         this.idItemType = idItemType;
-        this.price = price;
+        this.specifications = specifications;
         this.note = note;
     }
 }

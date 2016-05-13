@@ -11,6 +11,7 @@ public class Address {
     public int isCompany;
     public int idBillAddress;
 
+
     public Address(int idAddress, int address, int idPrivate, int idCompany, int isCompany, int idBillAddress) {
         this.idAddress = idAddress;
         this.address = address;

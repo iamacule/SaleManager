@@ -8,19 +8,24 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.hoangphuong2.salemanager.util.Tag;
+import com.hoangphuong2.salemanager.model.Address;
+import com.hoangphuong2.salemanager.model.Bill;
+import com.hoangphuong2.salemanager.model.Company;
+import com.hoangphuong2.salemanager.model.Item;
+import com.hoangphuong2.salemanager.model.ItemType;
+import com.hoangphuong2.salemanager.model.Phone;
+import com.hoangphuong2.salemanager.model.Private;
+import com.hoangphuong2.salemanager.model.Sale;
 
 
 /**
  * Create by An.Pham 22/04/2016
- * This class for manager the Database of AUDIUTR
  */
 public class Database {
     private Context mContext;
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDB;
-    private String stringValue = null;
-    private int intValue = 0;
+    private ContentValues contentValues;
 
     private final String DATABASE_NAME = "SALE_MANAGER";
     public final String DATABASE_TABLE_PRIVATE = "DATABASE_TABLE_PRIVATE";
@@ -80,7 +85,7 @@ public class Database {
 
     public final String DATABASE_TABLE_BILL = "DATABASE_TABLE_BILL";
     private final String DATABASE_CREATE_BILL = "CREATE TABLE DATABASE_TABLE_BILL (" +
-            "BILL_NUMBER INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "BILL_NUMBER INTEGER PRIMARY KEY," +
             "PRIVATE_ID INT," +
             "COMPANY_ID INT," +
             "BILL_DATE TEXT," +
@@ -118,7 +123,9 @@ public class Database {
     public String ITEM_NAME = "ITEM_NAME";
     public String ITEM_NAME_SPECIFICATION = "ITEM_NAME_SPECIFICATION";
     public String ITEM_NOTE = "ITEM_NOTE";
+
     public String SALE_PRICE = "SALE_PRICE";
+    public String SALE_NOTE = "SALE_NOTE";
 
     public String BILL_NUMBER = "BILL_NUMBER";
     public String BILL_DATE = "BILL_DATE";
@@ -195,15 +202,93 @@ public class Database {
         }
     }
 
-    public long insert(String table, String column, Object value) {
-        ContentValues contentValues = new ContentValues();
-        if (value instanceof String) {
-            stringValue = (String) value;
-            contentValues.put(column, stringValue);
-        } else {
-            intValue = (int) value;
-            contentValues.put(column, intValue);
-        }
+    public ContentValues createPrivate(Private data) {
+        contentValues = new ContentValues();
+        contentValues.clear();
+        contentValues.put(PRIVATE_NAME, data.name);
+        contentValues.put(PRIVATE_EMAIL, data.email);
+        contentValues.put(PRIVATE_NOTE, data.note);
+        contentValues.put(PRIVATE_SEX, data.sex);
+        contentValues.put(COMPANY_ID, data.idCompany);
+        return contentValues;
+    }
+
+    public ContentValues createPhone(Phone data) {
+        contentValues = new ContentValues();
+        contentValues.clear();
+        contentValues.put(PHONE_NUMBER, data.number);
+        contentValues.put(PHONE_NOTE, data.note);
+        contentValues.put(PRIVATE_ID, data.idPrivate);
+        contentValues.put(COMPANY_ID, data.isCompany);
+        contentValues.put(IS_COMPANY, data.isCompany);
+        return contentValues;
+    }
+
+    public ContentValues createAddress(Address data) {
+        contentValues = new ContentValues();
+        contentValues.clear();
+        contentValues.put(ADDRESS, data.address);
+        contentValues.put(PRIVATE_ID, data.idPrivate);
+        contentValues.put(COMPANY_ID, data.idCompany);
+        contentValues.put(IS_BILL_ADDRESS, data.idBillAddress);
+        contentValues.put(IS_COMPANY, data.isCompany);
+        return contentValues;
+    }
+
+    public ContentValues createCompany(Company data) {
+        contentValues = new ContentValues();
+        contentValues.clear();
+        contentValues.put(COMPANY_NAME, data.name);
+        contentValues.put(COMPANY_NOTE, data.note);
+        contentValues.put(COMPANY_TAX, data.tax);
+        return contentValues;
+    }
+
+    public ContentValues createItemType(ItemType data) {
+        contentValues = new ContentValues();
+        contentValues.clear();
+        contentValues.put(ITEM_TYPE_NAME, data.name);
+        contentValues.put(ITEM_TYPE_NOTE, data.note);
+        return contentValues;
+    }
+
+    public ContentValues createItem(Item data) {
+        contentValues = new ContentValues();
+        contentValues.clear();
+        contentValues.put(ITEM_NAME, data.name);
+        contentValues.put(ITEM_NAME_SPECIFICATION, data.specifications);
+        contentValues.put(ITEM_TYPE_ID, data.idItemType);
+        contentValues.put(ITEM_NOTE, data.note);
+        return contentValues;
+    }
+
+
+    public ContentValues createSale(Sale data) {
+        contentValues = new ContentValues();
+        contentValues.clear();
+        contentValues.put(ITEM_ID, data.idItem);
+        contentValues.put(PRIVATE_ID, data.idPrivate);
+        contentValues.put(COMPANY_ID, data.idCompany);
+        contentValues.put(SALE_PRICE, data.price);
+        contentValues.put(SALE_NOTE, data.note);
+        return contentValues;
+    }
+
+    public ContentValues createBill(Bill data) {
+        contentValues = new ContentValues();
+        contentValues.clear();
+        contentValues.put(BILL_NUMBER, data.number);
+        contentValues.put(PRIVATE_ID, data.idPrivate);
+        contentValues.put(COMPANY_ID, data.idCompany);
+        contentValues.put(BILL_DATE, data.date);
+        contentValues.put(BILL_TOTAL, data.total);
+        contentValues.put(IS_PAYED, data.payed);
+        contentValues.put(IS_PAY_TYPE, data.payType);
+        contentValues.put(BILL_NOTE, data.note);
+        return contentValues;
+    }
+
+    public long insert(ContentValues contentValues, String table) {
         boolean ss = false;
         while (!ss) {
             try {
@@ -227,61 +312,25 @@ public class Database {
         return idInsert;
     }
 
-    public int getIntValue(String table, String column) {
+    public Private getPrivate(int id) {
         Cursor mCursor = null;
+        Private data = new Private();
         try {
-            mCursor = mDB.query(true, table, new String[]{column}, null, null, null, null, null, null);
+            mCursor = mDB.query(true, DATABASE_TABLE_PRIVATE
+                    , new String[]{PRIVATE_ID, PRIVATE_NAME, PRIVATE_EMAIL, PRIVATE_SEX, PRIVATE_NOTE}
+                    , PRIVATE_ID + " = " + id, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
-                    intValue = mCursor.getInt(0);
+                    data.idPrivate = mCursor.getInt(0);
+                    data.name = mCursor.getString(1);
+                    data.email = mCursor.getString(2);
+                    data.sex = mCursor.getInt(3);
+                    data.note = mCursor.getString(4);
                 } while (mCursor.moveToNext());
             }
         } finally {
             mCursor.close();
         }
-        return intValue;
-    }
-
-    public String getStringValue(String table, String column) {
-        Cursor mCursor = null;
-        try {
-            mCursor = mDB.query(true, table, new String[]{column}, null, null, null, null, null, null);
-            if (mCursor != null && mCursor.moveToFirst()) {
-                do {
-                    stringValue = mCursor.getString(0);
-                } while (mCursor.moveToNext());
-            }
-        } finally {
-            mCursor.close();
-        }
-        return stringValue;
-    }
-
-    public void update(String table, String column, Object value) {
-        boolean ss = false;
-        while (!ss) {
-            try {
-                mDB.beginTransaction();
-                ss = true;
-            } catch (Exception e) {
-                mDB = mDBHelper.getReadableDatabase();
-            }
-        }
-        try {
-            if (value instanceof String) {
-                stringValue = (String) value;
-                mDB.execSQL("UPDATE " + table + " SET " + column + " = '" + stringValue + "'");
-            } else {
-                intValue = (int) value;
-                mDB.execSQL("UPDATE " + table + " SET " + column + " = " + intValue + "");
-            }
-            mDB.setTransactionSuccessful();
-            Log.d(Tag.Database, "Update success");
-        } catch (Exception e) {
-            mDB = mDBHelper.getReadableDatabase();
-            Log.d(Tag.Database, "Update fail");
-        } finally {
-            mDB.endTransaction();
-        }
+        return data;
     }
 }
