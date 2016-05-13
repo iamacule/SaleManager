@@ -6,4 +6,8 @@
     <string name="private_">Personal</string>
     <string name="company">Company</string>
     <string name="bill">Bill</string>
+    <string name="sort">Sort</string>
+    <string name="filler">Filter</string>
+    <string name="name">Name</string>
+    <string name="all">All</string>
 </resources>

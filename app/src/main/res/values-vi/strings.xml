@@ -6,4 +6,8 @@
     <string name="private_">Cá nhân</string>
     <string name="company">Công ty</string>
     <string name="bill">Hóa đơn</string>
+    <string name="sort">Sắp xếp</string>
+    <string name="filler">Lọc</string>
+    <string name="name">Tên</string>
+    <string name="all">Tất cả</string>
 </resources>

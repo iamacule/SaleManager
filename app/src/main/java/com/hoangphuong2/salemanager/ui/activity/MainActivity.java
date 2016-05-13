@@ -13,6 +13,7 @@ import android.view.View;
 import com.hoangphuong2.salemanager.R;
 import com.hoangphuong2.salemanager.ui.adapter.PagerAdapter;
 import com.hoangphuong2.salemanager.ui.control.OnSingleClickListener;
+import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
 
 /**
  * Created by MrAn on 12-May-16.
@@ -54,6 +55,20 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager = (ViewPager) findViewById(R.id.pager);
         addButton = (FloatingActionButton) findViewById(R.id.fab);
+    }
+
+    public void setVisibleAddButton(boolean isShow){
+        if(isShow){
+            if(addButton.getVisibility()==View.GONE){
+                addButton.startAnimation(AnimationUtil.slideInBottom(this));
+                addButton.setVisibility(View.VISIBLE);
+            }
+        }else {
+            if(addButton.getVisibility()==View.VISIBLE){
+                addButton.startAnimation(AnimationUtil.slideOutBottom(this));
+                addButton.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void initTabLayout() {

@@ -11,12 +11,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.hoangphuong2.salemanager.R;
 import com.hoangphuong2.salemanager.model.Private;
+import com.hoangphuong2.salemanager.ui.activity.MainActivity;
 import com.hoangphuong2.salemanager.ui.adapter.list.DataAdapter;
+import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
 import com.hoangphuong2.salemanager.util.ResizeBitmap;
 import com.hoangphuong2.salemanager.util.ScreenUtil;
+import com.hoangphuong2.salemanager.util.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,7 @@ import java.util.Random;
  */
 public class FragmentPrivate extends Fragment {
     private RecyclerView listData;
+    private LinearLayout lnOption;
     private float screenWidth;
 
     @Nullable
@@ -39,11 +44,12 @@ public class FragmentPrivate extends Fragment {
 
     private void initLayout(View view) {
         listData = (RecyclerView) view.findViewById(R.id.listData);
+        lnOption = (LinearLayout) view.findViewById(R.id.lnOption);
+        lnOption.setVisibility(View.GONE);
         List<Private> list = new ArrayList<>();
         Random r = new Random();
         for (int i = 0; i < 20; i++) {
             Private pri = new Private((char)(r.nextInt(26) + 'a')+" Sample : " + i);
-            Log.d("Name : ",pri.getName());
             list.add(pri);
         }
         screenWidth = ScreenUtil.getScreenWidth(getActivity().getWindowManager());
@@ -53,5 +59,33 @@ public class FragmentPrivate extends Fragment {
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         listData.setLayoutManager(layoutManager);
         listData.setAdapter(dataAdapter);
+        setOnSrcollListener();
+    }
+
+    private void setOnSrcollListener() {
+        listData.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    if(dy>10){
+                        // Scrolling up
+                        if (lnOption.getVisibility()==View.GONE){
+                            lnOption.startAnimation(AnimationUtil.slideInTop(getActivity()));
+                            lnOption.setVisibility(View.VISIBLE);
+                            ((MainActivity)getActivity()).setVisibleAddButton(false);
+                        }
+                    }
+                } else {
+                    if(dy<-10){
+                        // Scrolling down
+                        if (lnOption.getVisibility()==View.VISIBLE){
+                            lnOption.setVisibility(View.GONE);
+                            ((MainActivity)getActivity()).setVisibleAddButton(true);
+                        }
+                    }
+                }
+            }
+        });
     }
 }
