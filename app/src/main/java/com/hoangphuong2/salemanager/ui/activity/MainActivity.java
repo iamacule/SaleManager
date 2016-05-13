@@ -2,13 +2,17 @@ package com.hoangphuong2.salemanager.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.hoangphuong2.salemanager.R;
 import com.hoangphuong2.salemanager.ui.adapter.PagerAdapter;
+import com.hoangphuong2.salemanager.ui.control.OnSingleClickListener;
 
 /**
  * Created by MrAn on 12-May-16.
@@ -17,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private PagerAdapter adapter;
+    private FloatingActionButton addButton;
     private final int SELECTED = 1;
     private final int UNSELECTED = 0;
 
@@ -27,11 +32,28 @@ public class MainActivity extends AppCompatActivity {
         initLayout();
         initToolBar();
         initTabLayout();
+        setOnClick();
+    }
+
+    private void setOnClick() {
+        OnSingleClickListener onSingleClickListener = new OnSingleClickListener(500) {
+            @Override
+            public void onSingleClick(View v) {
+                switch (v.getId()){
+                    case R.id.fab:
+                        Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        break;
+                }
+            }
+        };
+        addButton.setOnClickListener(onSingleClickListener);
     }
 
     private void initLayout() {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager = (ViewPager) findViewById(R.id.pager);
+        addButton = (FloatingActionButton) findViewById(R.id.fab);
     }
 
     private void initTabLayout() {
