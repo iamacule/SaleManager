@@ -16,6 +16,10 @@ import com.hoangphuong2.salemanager.model.ItemType;
 import com.hoangphuong2.salemanager.model.Phone;
 import com.hoangphuong2.salemanager.model.Private;
 import com.hoangphuong2.salemanager.model.Sale;
+import com.hoangphuong2.salemanager.util.Tag;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -135,6 +139,8 @@ public class Database {
     public String IS_PAYED = "IS_PAYED";
     public String IS_PAY_TYPE = "IS_PAY_TYPE";
     public String BILL_NOTE = "BILL_NOTE";
+    private String stringValue;
+    private int intValue;
 
 
     public class DatabaseHelper extends SQLiteOpenHelper {
@@ -337,6 +343,30 @@ public class Database {
         return data;
     }
 
+    public List<Private> getAllPrivate() {
+        Cursor mCursor = null;
+        List<Private> list = new ArrayList<>();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_PRIVATE
+                    , new String[]{PRIVATE_ID, PRIVATE_NAME, PRIVATE_EMAIL, PRIVATE_SEX, PRIVATE_NOTE}
+                    , null, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    Private data = new Private();
+                    data.idPrivate = mCursor.getInt(0);
+                    data.name = mCursor.getString(1);
+                    data.email = mCursor.getString(2);
+                    data.sex = mCursor.getInt(3);
+                    data.note = mCursor.getString(4);
+                    list.add(data);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return list;
+    }
+
     public Phone getPhone(int number) {
         Cursor mCursor = null;
         Phone data = new Phone();
@@ -357,6 +387,30 @@ public class Database {
             mCursor.close();
         }
         return data;
+    }
+
+    public List<Phone> getAllPhone() {
+        Cursor mCursor = null;
+        List<Phone> list = new ArrayList<>();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_PHONE
+                    , new String[]{PHONE_NUMBER, PRIVATE_ID, COMPANY_ID, IS_COMPANY, PHONE_NOTE}
+                    , null, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    Phone data = new Phone();
+                    data.number = mCursor.getString(0);
+                    data.idPrivate = mCursor.getInt(1);
+                    data.isCompany = mCursor.getInt(2);
+                    data.isCompany = mCursor.getInt(3);
+                    data.note = mCursor.getString(4);
+                    list.add(data);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return list;
     }
 
     public Address getAddress(int id) {
@@ -383,6 +437,32 @@ public class Database {
         return data;
     }
 
+    public List<Address> getAllAddress() {
+        Cursor mCursor = null;
+        List<Address> list = new ArrayList<>();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_ADDRESS
+                    , new String[]{ADDRESS_ID, ADDRESS, PRIVATE_ID, COMPANY_ID, IS_COMPANY, IS_BILL_ADDRESS, ADDRESS_NOTE}
+                    , null, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    Address data = new Address();
+                    data.idAddress = mCursor.getInt(0);
+                    data.address = mCursor.getString(1);
+                    data.idPrivate = mCursor.getInt(2);
+                    data.isCompany = mCursor.getInt(3);
+                    data.isCompany = mCursor.getInt(4);
+                    data.isBillAddress = mCursor.getInt(5);
+                    data.note = mCursor.getString(6);
+                    list.add(data);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return list;
+    }
+
     public Company getCompany(int id) {
         Cursor mCursor = null;
         Company data = new Company();
@@ -404,6 +484,29 @@ public class Database {
         return data;
     }
 
+    public List<Company> getAllCompany() {
+        Cursor mCursor = null;
+        List<Company> list = new ArrayList<>();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_COMPANY
+                    , new String[]{COMPANY_ID, COMPANY_NAME, COMPANY_TAX, COMPANY_NOTE}
+                    , null, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    Company data = new Company();
+                    data.idCompany = mCursor.getInt(0);
+                    data.name = mCursor.getString(1);
+                    data.tax = mCursor.getString(2);
+                    data.note = mCursor.getString(3);
+                    list.add(data);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return list;
+    }
+
     public ItemType getItemType(int id) {
         Cursor mCursor = null;
         ItemType data = new ItemType();
@@ -422,6 +525,28 @@ public class Database {
             mCursor.close();
         }
         return data;
+    }
+
+    public List<ItemType> getAllItemType() {
+        Cursor mCursor = null;
+        List<ItemType> list = new ArrayList<>();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_ITEM_TYPE
+                    , new String[]{ITEM_TYPE_ID, ITEM_TYPE_NAME, ITEM_TYPE_NOTE}
+                    , null, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    ItemType data = new ItemType();
+                    data.idItemType = mCursor.getInt(0);
+                    data.name = mCursor.getString(1);
+                    data.note = mCursor.getString(2);
+                    list.add(data);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return list;
     }
 
     public Item getItem(int id) {
@@ -446,6 +571,30 @@ public class Database {
         return data;
     }
 
+    public List<Item> getAllItem() {
+        Cursor mCursor = null;
+        List<Item> list = new ArrayList<>();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_ITEM
+                    , new String[]{ITEM_ID, ITEM_NAME, ITEM_NAME_SPECIFICATION, ITEM_NOTE, ITEM_TYPE_ID}
+                    , null, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    Item data = new Item();
+                    data.idItem = mCursor.getInt(0);
+                    data.name = mCursor.getString(1);
+                    data.specifications = mCursor.getString(2);
+                    data.note = mCursor.getString(3);
+                    data.idItemType = mCursor.getInt(4);
+                    list.add(data);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return list;
+    }
+
     public Sale getSale(int id) {
         Cursor mCursor = null;
         Sale data = new Sale();
@@ -466,6 +615,30 @@ public class Database {
             mCursor.close();
         }
         return data;
+    }
+
+    public List<Sale> getAllSale() {
+        Cursor mCursor = null;
+        List<Sale> list = new ArrayList<>();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_SALE
+                    , new String[]{ITEM_ID, PRIVATE_ID, COMPANY_ID, SALE_PRICE, SALE_NOTE}
+                    , null, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    Sale data = new Sale();
+                    data.idItem = mCursor.getInt(0);
+                    data.idPrivate = mCursor.getInt(1);
+                    data.idCompany = mCursor.getInt(2);
+                    data.price = mCursor.getInt(3);
+                    data.note = mCursor.getString(4);
+                    list.add(data);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return list;
     }
 
     public Bill getBill(int id) {
@@ -491,5 +664,89 @@ public class Database {
             mCursor.close();
         }
         return data;
+    }
+
+    public List<Bill> getAllBill() {
+        Cursor mCursor = null;
+        List<Bill> list = new ArrayList<>();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_BILL
+                    , new String[]{BILL_NUMBER, PRIVATE_ID, COMPANY_ID, BILL_DATE, BILL_TOTAL, IS_PAYED, IS_PAY_TYPE, BILL_NOTE}
+                    , null, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    Bill data = new Bill();
+                    data.number = mCursor.getInt(0);
+                    data.idPrivate = mCursor.getInt(1);
+                    data.idCompany = mCursor.getInt(2);
+                    data.date = mCursor.getInt(3);
+                    data.total = mCursor.getInt(4);
+                    data.payed = mCursor.getInt(5);
+                    data.payType = mCursor.getInt(6);
+                    data.note = mCursor.getString(7);
+                    list.add(data);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return list;
+    }
+
+    public void update(String table, String column, Object value) {
+        boolean ss = false;
+        while (!ss) {
+            try {
+                mDB.beginTransaction();
+                ss = true;
+            } catch (Exception e) {
+                mDB = mDBHelper.getReadableDatabase();
+            }
+        }
+        try {
+            if (value instanceof String) {
+                stringValue = (String) value;
+                mDB.execSQL("UPDATE " + table + " SET " + column + " = '" + stringValue + "'");
+            } else {
+                intValue = (int) value;
+                mDB.execSQL("UPDATE " + table + " SET " + column + " = " + intValue + "");
+            }
+            mDB.setTransactionSuccessful();
+            Log.d(Tag.Database, "Update success");
+        } catch (Exception e) {
+            mDB = mDBHelper.getReadableDatabase();
+            Log.d(Tag.Database, "Update fail");
+        } finally {
+            mDB.endTransaction();
+        }
+    }
+
+    public void delete(String table, String column, Object value) {
+        boolean ss = false;
+        while (!ss) {
+            try {
+                mDB.beginTransaction();
+                ss = true;
+            } catch (Exception e) {
+                mDB = mDBHelper.getReadableDatabase();
+            }
+        }
+        try {
+            if (value instanceof String) {
+                stringValue = (String) value;
+                mDB.execSQL("DELETE FROM " + table
+                        + " WHERE " + column + " = \"" + stringValue + "\"");
+            } else {
+                intValue = (int) value;
+                mDB.execSQL("DELETE FROM " + table
+                        + " WHERE " + column + " = " + intValue + "");
+            }
+
+            mDB.setTransactionSuccessful();
+        } catch (Exception e) {
+            mDB = mDBHelper.getReadableDatabase();
+        } finally {
+            mDB.endTransaction();
+        }
     }
 }
