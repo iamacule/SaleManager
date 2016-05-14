@@ -10,6 +10,9 @@ public class Phone {
     public int idCompany;
     public int isCompany;
 
+    public Phone() {
+    }
+
     public Phone(String number, String note, int idPrivate, int idCompany, int isCompany) {
         this.number = number;
         this.note = note;

@@ -8,6 +8,9 @@ public class ItemType {
     public String name;
     public String note;
 
+    public ItemType() {
+    }
+
     public ItemType(int idItemType, String name, String note) {
         this.idItemType = idItemType;
         this.name = name;

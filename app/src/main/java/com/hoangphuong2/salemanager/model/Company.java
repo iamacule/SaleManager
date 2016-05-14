@@ -9,7 +9,10 @@ public class Company {
     public String tax;
     public String note;
 
-    public Company(int idCompany, String name, String tax,String note) {
+    public Company() {
+    }
+
+    public Company(int idCompany, String name, String tax, String note) {
         this.idCompany = idCompany;
         this.name = name;
         this.tax = tax;

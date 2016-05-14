@@ -13,6 +13,9 @@ public class Bill {
     public int payType;
     public String note;
 
+    public Bill() {
+    }
+
     public Bill(int number, int idCompany, int idPrivate, long date, int total, int payed, int payType, String note) {
         this.number = number;
         this.idCompany = idCompany;

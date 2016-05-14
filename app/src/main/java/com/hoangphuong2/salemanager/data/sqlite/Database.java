@@ -52,6 +52,7 @@ public class Database {
             "PRIVATE_ID INT," +
             "COMPANY_ID INT," +
             "IS_BILL_ADDRESS INT," +
+            "ADDRESS_NOTE TEXT," +
             "IS_COMPANY INT);";
 
     public final String DATABASE_TABLE_COMPANY = "DATABASE_TABLE_COMPANY";
@@ -110,6 +111,7 @@ public class Database {
     public String ADDRESS_ID = "ADDRESS_ID";
     public String ADDRESS = "ADDRESS";
     public String IS_BILL_ADDRESS = "IS_BILL_ADDRESS";
+    public String ADDRESS_NOTE = "ADDRESS_NOTE";
 
     public String COMPANY_NAME = "COMPANY_NAME";
     public String COMPANY_TAX = "COMPANY_TAX";
@@ -230,8 +232,9 @@ public class Database {
         contentValues.put(ADDRESS, data.address);
         contentValues.put(PRIVATE_ID, data.idPrivate);
         contentValues.put(COMPANY_ID, data.idCompany);
-        contentValues.put(IS_BILL_ADDRESS, data.idBillAddress);
+        contentValues.put(IS_BILL_ADDRESS, data.isBillAddress);
         contentValues.put(IS_COMPANY, data.isCompany);
+        contentValues.put(ADDRESS_NOTE, data.note);
         return contentValues;
     }
 
@@ -326,6 +329,162 @@ public class Database {
                     data.email = mCursor.getString(2);
                     data.sex = mCursor.getInt(3);
                     data.note = mCursor.getString(4);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return data;
+    }
+
+    public Phone getPhone(int number) {
+        Cursor mCursor = null;
+        Phone data = new Phone();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_PHONE
+                    , new String[]{PHONE_NUMBER, PRIVATE_ID, COMPANY_ID, IS_COMPANY, PHONE_NOTE}
+                    , PHONE_NUMBER + " = " + number, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    data.number = mCursor.getString(0);
+                    data.idPrivate = mCursor.getInt(1);
+                    data.isCompany = mCursor.getInt(2);
+                    data.isCompany = mCursor.getInt(3);
+                    data.note = mCursor.getString(4);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return data;
+    }
+
+    public Address getAddress(int id) {
+        Cursor mCursor = null;
+        Address data = new Address();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_ADDRESS
+                    , new String[]{ADDRESS_ID, ADDRESS, PRIVATE_ID, COMPANY_ID, IS_COMPANY, IS_BILL_ADDRESS, ADDRESS_NOTE}
+                    , ADDRESS_ID + " = " + id, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    data.idAddress = mCursor.getInt(0);
+                    data.address = mCursor.getString(1);
+                    data.idPrivate = mCursor.getInt(2);
+                    data.isCompany = mCursor.getInt(3);
+                    data.isCompany = mCursor.getInt(4);
+                    data.isBillAddress = mCursor.getInt(5);
+                    data.note = mCursor.getString(6);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return data;
+    }
+
+    public Company getCompany(int id) {
+        Cursor mCursor = null;
+        Company data = new Company();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_COMPANY
+                    , new String[]{COMPANY_ID, COMPANY_NAME, COMPANY_TAX, COMPANY_NOTE}
+                    , COMPANY_ID + " = " + id, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    data.idCompany = mCursor.getInt(0);
+                    data.name = mCursor.getString(1);
+                    data.tax = mCursor.getString(2);
+                    data.note = mCursor.getString(3);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return data;
+    }
+
+    public ItemType getItemType(int id) {
+        Cursor mCursor = null;
+        ItemType data = new ItemType();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_ITEM_TYPE
+                    , new String[]{ITEM_TYPE_ID, ITEM_TYPE_NAME, ITEM_TYPE_NOTE}
+                    , ITEM_TYPE_ID + " = " + id, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    data.idItemType = mCursor.getInt(0);
+                    data.name = mCursor.getString(1);
+                    data.note = mCursor.getString(2);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return data;
+    }
+
+    public Item getItem(int id) {
+        Cursor mCursor = null;
+        Item data = new Item();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_ITEM
+                    , new String[]{ITEM_ID, ITEM_NAME, ITEM_NAME_SPECIFICATION, ITEM_NOTE, ITEM_TYPE_ID}
+                    , ITEM_ID + " = " + id, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    data.idItem = mCursor.getInt(0);
+                    data.name = mCursor.getString(1);
+                    data.specifications = mCursor.getString(2);
+                    data.note = mCursor.getString(3);
+                    data.idItemType = mCursor.getInt(4);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return data;
+    }
+
+    public Sale getSale(int id) {
+        Cursor mCursor = null;
+        Sale data = new Sale();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_SALE
+                    , new String[]{ITEM_ID, PRIVATE_ID, COMPANY_ID, SALE_PRICE, SALE_NOTE}
+                    , PRIVATE_ID + " = " + id + " OR " + COMPANY_ID + " = " + id, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    data.idItem = mCursor.getInt(0);
+                    data.idPrivate = mCursor.getInt(1);
+                    data.idCompany = mCursor.getInt(2);
+                    data.price = mCursor.getInt(3);
+                    data.note = mCursor.getString(4);
+                } while (mCursor.moveToNext());
+            }
+        } finally {
+            mCursor.close();
+        }
+        return data;
+    }
+
+    public Bill getBill(int id) {
+        Cursor mCursor = null;
+        Bill data = new Bill();
+        try {
+            mCursor = mDB.query(true, DATABASE_TABLE_BILL
+                    , new String[]{BILL_NUMBER, PRIVATE_ID, COMPANY_ID, BILL_DATE, BILL_TOTAL, IS_PAYED, IS_PAY_TYPE, BILL_NOTE}
+                    , BILL_NUMBER + " = " + id, null, null, null, null, null);
+            if (mCursor != null && mCursor.moveToFirst()) {
+                do {
+                    data.number = mCursor.getInt(0);
+                    data.idPrivate = mCursor.getInt(1);
+                    data.idCompany = mCursor.getInt(2);
+                    data.date = mCursor.getInt(3);
+                    data.total = mCursor.getInt(4);
+                    data.payed = mCursor.getInt(5);
+                    data.payType = mCursor.getInt(6);
+                    data.note = mCursor.getString(7);
                 } while (mCursor.moveToNext());
             }
         } finally {

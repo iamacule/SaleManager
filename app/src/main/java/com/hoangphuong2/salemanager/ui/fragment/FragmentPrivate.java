@@ -49,7 +49,7 @@ public class FragmentPrivate extends Fragment {
         List<Private> list = new ArrayList<>();
         Random r = new Random();
         for (int i = 0; i < 20; i++) {
-            Private pri = new Private((char)(r.nextInt(26) + 'a')+" Sample : " + i);
+            Private pri = new Private(0,(char)(r.nextInt(26) + 'a')+" Sample : " + i,null,null,null,0,0);
             list.add(pri);
         }
         screenWidth = ScreenUtil.getScreenWidth(getActivity().getWindowManager());

@@ -5,19 +5,23 @@ package com.hoangphuong2.salemanager.model;
  */
 public class Address {
     public int idAddress;
-    public int address;
+    public String address;
     public int idPrivate;
     public int idCompany;
     public int isCompany;
-    public int idBillAddress;
+    public int isBillAddress;
+    public String note;
 
+    public Address() {
+    }
 
-    public Address(int idAddress, int address, int idPrivate, int idCompany, int isCompany, int idBillAddress) {
+    public Address(int idAddress, String address, int idPrivate, int idCompany, int isCompany, int isBillAddress,String note) {
         this.idAddress = idAddress;
         this.address = address;
         this.idPrivate = idPrivate;
         this.idCompany = idCompany;
         this.isCompany = isCompany;
-        this.idBillAddress = idBillAddress;
+        this.isBillAddress = isBillAddress;
+        this.note = note;
     }
 }

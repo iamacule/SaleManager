@@ -10,6 +10,9 @@ public class Item {
     public String specifications;
     public String note;
 
+    public Item() {
+    }
+
     public Item(int idItem, String name, int idItemType, String specifications, String note) {
         this.idItem = idItem;
         this.name = name;

@@ -8,9 +8,12 @@ public class Sale {
     public int idCompany;
     public int idPrivate;
     public int price;
-    public int note;
+    public String note;
 
-    public Sale(int idItem, int idCompany, int idPrivate, int price, int note) {
+    public Sale() {
+    }
+
+    public Sale(int idItem, int idCompany, int idPrivate, int price, String note) {
         this.idItem = idItem;
         this.idCompany = idCompany;
         this.idPrivate = idPrivate;

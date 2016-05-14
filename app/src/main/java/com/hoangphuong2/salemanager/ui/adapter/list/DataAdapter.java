@@ -39,8 +39,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataHolder> {
     public void onBindViewHolder(DataHolder holder, int position) {
         final Private aPrivate = getItem(position);
         holder.imgAvatar.setImageBitmap(bitmap);
-        holder.txtAvatar.setText(Character.toString(aPrivate.getName().charAt(0)).toUpperCase());
-        holder.txtName.setText(aPrivate.getName());
+        holder.txtAvatar.setText(Character.toString(aPrivate.name.charAt(0)).toUpperCase());
+        holder.txtName.setText(aPrivate.name);
     }
 
     @Override
