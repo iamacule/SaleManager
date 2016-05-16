@@ -10,4 +10,14 @@
     <string name="filler">Lọc</string>
     <string name="name">Tên</string>
     <string name="all">Tất cả</string>
+    <string name="no_data">Không có dữ liệu</string>
+    <string name="address">Địa chỉ</string>
+    <string name="phone">Điện thoại</string>
+    <string name="email">Mail</string>
+    <string name="note">Ghi Chú</string>
+    <string name="sex">Giới tính</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="save">Lưu</string>
+    <string name="add_to_company">Thêm vào công ty</string>
 </resources>

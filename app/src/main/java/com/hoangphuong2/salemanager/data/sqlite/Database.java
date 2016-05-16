@@ -26,10 +26,11 @@ import java.util.List;
  * Create by An.Pham 22/04/2016
  */
 public class Database {
-    private Context mContext;
+    private static Context mContext;
     private DatabaseHelper mDBHelper;
     private SQLiteDatabase mDB;
     private ContentValues contentValues;
+    private static Database instance;
 
     private final String DATABASE_NAME = "SALE_MANAGER";
     public final String DATABASE_TABLE_PRIVATE = "DATABASE_TABLE_PRIVATE";
@@ -186,8 +187,18 @@ public class Database {
         }
     }
 
-    public Database(Context context) {
-        this.mContext = context;
+    public static void setUp(Context context) {
+        mContext = context;
+    }
+
+    public static Database getInstance(){
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
+    }
+
+    private Database() {
     }
 
     public Database open() {

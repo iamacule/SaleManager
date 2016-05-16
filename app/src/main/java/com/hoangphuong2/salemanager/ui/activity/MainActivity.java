@@ -1,5 +1,6 @@
 package com.hoangphuong2.salemanager.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,7 @@ import com.hoangphuong2.salemanager.R;
 import com.hoangphuong2.salemanager.ui.adapter.PagerAdapter;
 import com.hoangphuong2.salemanager.ui.control.OnSingleClickListener;
 import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
+import com.hoangphuong2.salemanager.util.DataUtil;
 
 /**
  * Created by MrAn on 12-May-16.
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton addButton;
     private final int SELECTED = 1;
     private final int UNSELECTED = 0;
+    private Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,8 +45,18 @@ public class MainActivity extends AppCompatActivity {
             public void onSingleClick(View v) {
                 switch (v.getId()){
                     case R.id.fab:
-                        Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                        switch (DataUtil.current_fragment){
+                            case DataUtil.PRIVATE:
+                                intent = new Intent(MainActivity.this,AddPrivateActivity.class);
+                                startActivity(intent);
+                                break;
+                            case DataUtil.COMPANY:
+
+                                break;
+                            case DataUtil.BILL:
+
+                                break;
+                        }
                         break;
                 }
             }
@@ -84,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                DataUtil.current_fragment=tab.getPosition();
                 setIcon(SELECTED,tab);
             }
 

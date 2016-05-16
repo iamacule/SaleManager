@@ -10,4 +10,14 @@
     <string name="filler">Filter</string>
     <string name="name">Name</string>
     <string name="all">All</string>
+    <string name="no_data">No data available</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="note">Note</string>
+    <string name="sex">Sex</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="save">Save</string>
+    <string name="add_to_company">Add to Company</string>
 </resources>

@@ -65,8 +65,21 @@
         </LinearLayout>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/listData"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtNodata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_data"
+            android:textColor="@color/colorRed" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 </LinearLayout>

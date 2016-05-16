@@ -1,13 +1,10 @@
 package com.hoangphuong2.salemanager.ui.fragment;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,13 +18,8 @@ import com.hoangphuong2.salemanager.ui.activity.MainActivity;
 import com.hoangphuong2.salemanager.ui.adapter.list.DataAdapter;
 import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
 import com.hoangphuong2.salemanager.util.DataUtil;
-import com.hoangphuong2.salemanager.util.ResizeBitmap;
-import com.hoangphuong2.salemanager.util.ScreenUtil;
-import com.hoangphuong2.salemanager.util.Tag;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by MrAn on 12-May-16.
@@ -55,17 +47,22 @@ public class FragmentPrivate extends Fragment {
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+        setOnSrcollListener();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         Database.getInstance().open();
         listData = Database.getInstance().getAllPrivate();
         Database.getInstance().close();
         showHideNodata(listData.size());
         dataAdapter = new DataAdapter(listData, DataUtil.redCircle);
         recyclerView.setAdapter(dataAdapter);
-        setOnSrcollListener();
     }
 
     private void showHideNodata(int size) {
-        if(size>0)
+        if (size > 0)
             txtNoData.setVisibility(View.GONE);
     }
 
