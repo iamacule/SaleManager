@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.RadioButton;
 
 import com.hoangphuong2.salemanager.R;
 import com.hoangphuong2.salemanager.data.sqlite.Database;
+import com.hoangphuong2.salemanager.model.Phone;
 import com.hoangphuong2.salemanager.model.Private;
 import com.hoangphuong2.salemanager.ui.control.OnSingleClickListener;
 import com.hoangphuong2.salemanager.ui.toast.Boast;
@@ -132,15 +134,27 @@ public class AddPrivateActivity extends AppCompatActivity {
 
         if (canSave) {
             Database.getInstance().open();
-            Private data = new Private();
-            data.name = etName.getText().toString().trim();
-            data.address = etAddress.getText().toString().trim();
-            data.email = etMail.getText().toString().trim();
-            data.note = etNote.getText().toString().trim();
-            data.sex = sex;
-            ContentValues contentValues = Database.getInstance().createPrivate(data);
-            Database.getInstance().insert(contentValues,Database.getInstance().DATABASE_TABLE_PRIVATE);
+            //Create and insert Private
+            DataUtil.privateData = new Private();
+            DataUtil.privateData.name = etName.getText().toString().trim();
+            DataUtil.privateData.address = etAddress.getText().toString().trim();
+            DataUtil.privateData.email = etMail.getText().toString().trim();
+            DataUtil.privateData.note = etNote.getText().toString().trim();
+            DataUtil.privateData.sex = sex;
+            ContentValues contentValues = Database.getInstance().createPrivate(DataUtil.privateData);
+            DataUtil.privateData.idPrivate = (int) Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PRIVATE);
+
+            //Create and insert Phone
+            DataUtil.phoneData = new Phone();
+            DataUtil.phoneData.isCompany = 0;
+            DataUtil.phoneData.idPrivate = DataUtil.privateData.idPrivate;
+            DataUtil.phoneData.number = etPhone.getText().toString().trim();
+            DataUtil.phoneData.idCompany = 0;
+            DataUtil.phoneData.note = "";
+            contentValues = Database.getInstance().createPhone(DataUtil.phoneData);
+            Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PHONE);
             Database.getInstance().close();
+            DataUtil.needAddNew = true;
             onBackPressed();
         } else {
             Boast.makeText(AddPrivateActivity.this, "Data wrong !!").show();

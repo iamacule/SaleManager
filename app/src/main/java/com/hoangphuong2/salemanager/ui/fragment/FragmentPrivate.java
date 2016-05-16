@@ -19,6 +19,7 @@ import com.hoangphuong2.salemanager.ui.adapter.list.DataAdapter;
 import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
 import com.hoangphuong2.salemanager.util.DataUtil;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -47,18 +48,25 @@ public class FragmentPrivate extends Fragment {
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+        Database.getInstance().open();
+        listData = Database.getInstance().getAllPrivate();
+        Collections.sort(listData,Private.COMPARE_BY_NAME);
+        Database.getInstance().close();
+        showHideNodata(listData.size());
+        dataAdapter = new DataAdapter(getActivity(),listData);
+        recyclerView.setAdapter(dataAdapter);
         setOnSrcollListener();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Database.getInstance().open();
-        listData = Database.getInstance().getAllPrivate();
-        Database.getInstance().close();
-        showHideNodata(listData.size());
-        dataAdapter = new DataAdapter(listData, DataUtil.redCircle);
-        recyclerView.setAdapter(dataAdapter);
+        if(DataUtil.needAddNew){
+            DataUtil.needAddNew = false;
+            listData.add(DataUtil.privateData);
+            Collections.sort(listData,Private.COMPARE_BY_NAME);
+            dataAdapter.notifyDataSetChanged();
+        }
     }
 
     private void showHideNodata(int size) {

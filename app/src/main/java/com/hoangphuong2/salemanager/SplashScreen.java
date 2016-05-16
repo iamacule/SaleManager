@@ -31,6 +31,8 @@ public class SplashScreen extends AppCompatActivity {
         ownerName = Preferences.getInstance(getApplicationContext()).getStringValue(Preferences.SALE_MANAGER_OWNER_NAME);
         DataUtil.screenWidth = ScreenUtil.getScreenWidth(getWindowManager());
         DataUtil.redCircle = ResizeBitmap.resize(BitmapFactory.decodeResource(getResources(), R.drawable.red_circle), DataUtil.screenWidth / 8);
+        DataUtil.imgSMS = ResizeBitmap.resize(BitmapFactory.decodeResource(getResources(), R.drawable.sms), DataUtil.screenWidth / 14);
+        DataUtil.imgCall = ResizeBitmap.resize(BitmapFactory.decodeResource(getResources(), R.drawable.call), DataUtil.screenWidth / 12);
         Database.setUp(getApplicationContext());
     }
 

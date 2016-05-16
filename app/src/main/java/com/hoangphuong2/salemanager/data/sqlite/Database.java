@@ -191,7 +191,7 @@ public class Database {
         mContext = context;
     }
 
-    public static Database getInstance(){
+    public static Database getInstance() {
         if (instance == null) {
             instance = new Database();
         }
@@ -378,13 +378,13 @@ public class Database {
         return list;
     }
 
-    public Phone getPhone(int number) {
+    public Phone getPhone(int id) {
         Cursor mCursor = null;
         Phone data = new Phone();
         try {
             mCursor = mDB.query(true, DATABASE_TABLE_PHONE
                     , new String[]{PHONE_NUMBER, PRIVATE_ID, COMPANY_ID, IS_COMPANY, PHONE_NOTE}
-                    , PHONE_NUMBER + " = " + number, null, null, null, null, null);
+                    , PRIVATE_ID + " = " + id + " OR " + COMPANY_ID + " = " + id, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
                     data.number = mCursor.getString(0);
@@ -400,13 +400,13 @@ public class Database {
         return data;
     }
 
-    public List<Phone> getAllPhone() {
+    public List<Phone> getAllPhoneOfPerson(int id) {
         Cursor mCursor = null;
         List<Phone> list = new ArrayList<>();
         try {
             mCursor = mDB.query(true, DATABASE_TABLE_PHONE
                     , new String[]{PHONE_NUMBER, PRIVATE_ID, COMPANY_ID, IS_COMPANY, PHONE_NOTE}
-                    , null, null, null, null, null, null);
+                    , PRIVATE_ID + " = " + id + " OR " + COMPANY_ID + " = " + id, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
                     Phone data = new Phone();

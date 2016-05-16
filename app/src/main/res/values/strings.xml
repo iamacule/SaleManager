@@ -20,4 +20,5 @@
     <string name="female">Female</string>
     <string name="save">Save</string>
     <string name="add_to_company">Add to Company</string>
+    <string name="private_no_phone">Not found phone number of this person !</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.hoangphuong2.salemanager.model;
 
+import java.util.Comparator;
+
 /**
  * Created by MrAn on 13-May-16.
  */
@@ -24,4 +26,10 @@ public class Private {
         this.sex = sex;
         this.idCompany = idCompany;
     }
+
+    public static Comparator<Private> COMPARE_BY_NAME = new Comparator<Private>() {
+        public int compare(Private one, Private other) {
+            return one.name.compareTo(other.name);
+        }
+    };
 }
