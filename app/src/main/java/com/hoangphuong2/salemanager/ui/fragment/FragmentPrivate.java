@@ -12,12 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hoangphuong2.salemanager.R;
+import com.hoangphuong2.salemanager.data.sqlite.Database;
 import com.hoangphuong2.salemanager.model.Private;
 import com.hoangphuong2.salemanager.ui.activity.MainActivity;
 import com.hoangphuong2.salemanager.ui.adapter.list.DataAdapter;
 import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
+import com.hoangphuong2.salemanager.util.DataUtil;
 import com.hoangphuong2.salemanager.util.ResizeBitmap;
 import com.hoangphuong2.salemanager.util.ScreenUtil;
 import com.hoangphuong2.salemanager.util.Tag;
@@ -30,9 +33,11 @@ import java.util.Random;
  * Created by MrAn on 12-May-16.
  */
 public class FragmentPrivate extends Fragment {
-    private RecyclerView listData;
+    private RecyclerView recyclerView;
     private LinearLayout lnOption;
-    private float screenWidth;
+    private List<Private> listData;
+    private DataAdapter dataAdapter;
+    private TextView txtNoData;
 
     @Nullable
     @Override
@@ -43,45 +48,47 @@ public class FragmentPrivate extends Fragment {
     }
 
     private void initLayout(View view) {
-        listData = (RecyclerView) view.findViewById(R.id.listData);
+        recyclerView = (RecyclerView) view.findViewById(R.id.listData);
         lnOption = (LinearLayout) view.findViewById(R.id.lnOption);
+        txtNoData = (TextView) view.findViewById(R.id.txtNodata);
         lnOption.setVisibility(View.GONE);
-        List<Private> list = new ArrayList<>();
-        Random r = new Random();
-        for (int i = 0; i < 20; i++) {
-            Private pri = new Private(0,(char)(r.nextInt(26) + 'a')+" Sample : " + i,null,null,null,0,0);
-            list.add(pri);
-        }
-        screenWidth = ScreenUtil.getScreenWidth(getActivity().getWindowManager());
-        Bitmap img = ResizeBitmap.resize(BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.red_circle), screenWidth / 8);
-        DataAdapter dataAdapter = new DataAdapter(list, img);
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        listData.setLayoutManager(layoutManager);
-        listData.setAdapter(dataAdapter);
+        recyclerView.setLayoutManager(layoutManager);
+        Database.getInstance().open();
+        listData = Database.getInstance().getAllPrivate();
+        Database.getInstance().close();
+        showHideNodata(listData.size());
+        dataAdapter = new DataAdapter(listData, DataUtil.redCircle);
+        recyclerView.setAdapter(dataAdapter);
         setOnSrcollListener();
     }
 
+    private void showHideNodata(int size) {
+        if(size>0)
+            txtNoData.setVisibility(View.GONE);
+    }
+
     private void setOnSrcollListener() {
-        listData.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy > 0) {
-                    if(dy>10){
+                    if (dy > 10) {
                         // Scrolling up
-                        if (lnOption.getVisibility()==View.GONE){
+                        if (lnOption.getVisibility() == View.GONE) {
                             lnOption.startAnimation(AnimationUtil.slideInTop(getActivity()));
                             lnOption.setVisibility(View.VISIBLE);
-                            ((MainActivity)getActivity()).setVisibleAddButton(false);
+                            ((MainActivity) getActivity()).setVisibleAddButton(false);
                         }
                     }
                 } else {
-                    if(dy<-10){
+                    if (dy < -10) {
                         // Scrolling down
-                        if (lnOption.getVisibility()==View.VISIBLE){
+                        if (lnOption.getVisibility() == View.VISIBLE) {
                             lnOption.setVisibility(View.GONE);
-                            ((MainActivity)getActivity()).setVisibleAddButton(true);
+                            ((MainActivity) getActivity()).setVisibleAddButton(true);
                         }
                     }
                 }
