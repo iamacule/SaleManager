@@ -45,7 +45,7 @@ public class Database {
     public final String DATABASE_TABLE_PHONE = "DATABASE_TABLE_PHONE";
     private final String DATABASE_CREATE_PHONE = "CREATE TABLE DATABASE_TABLE_PHONE (" +
             "PHONE_NUMBER INTEGER PRIMARY KEY," +
-            "PHONE_NOTE TEXT," +
+            "PHONE_NOTE INT," +
             "PRIVATE_ID INT," +
             "COMPANY_ID INT," +
             "IS_COMPANY INT);";
@@ -391,7 +391,7 @@ public class Database {
                     data.idPrivate = mCursor.getInt(1);
                     data.isCompany = mCursor.getInt(2);
                     data.isCompany = mCursor.getInt(3);
-                    data.note = mCursor.getString(4);
+                    data.note = mCursor.getInt(4);
                 } while (mCursor.moveToNext());
             }
         } finally {
@@ -414,7 +414,7 @@ public class Database {
                     data.idPrivate = mCursor.getInt(1);
                     data.isCompany = mCursor.getInt(2);
                     data.isCompany = mCursor.getInt(3);
-                    data.note = mCursor.getString(4);
+                    data.note = mCursor.getInt(4);
                     list.add(data);
                 } while (mCursor.moveToNext());
             }

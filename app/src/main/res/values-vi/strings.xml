@@ -21,4 +21,8 @@
     <string name="save">Lưu</string>
     <string name="add_to_company">Thêm vào công ty</string>
     <string name="private_no_phone">Không tìm thấy số liên lạc của người này !</string>
+    <string name="home">Nhà</string>
+    <string name="mobile">Di động</string>
+    <string name="work">Công việc</string>
+    <string name="order">Khác</string>
 </resources>

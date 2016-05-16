@@ -9,6 +9,14 @@ import com.hoangphuong2.salemanager.model.Private;
  * Created by MrAn on 16-May-16.
  */
 public class DataUtil {
+    public static String PHONE_MOBILE;
+    public static String PHONE_HOME;
+    public static String PHONE_WORK;
+    public static String PHONE_MORE;
+    public static int PHONE_MOBILE_INT = 0;
+    public static int PHONE_HOME_INT = 1;
+    public static int PHONE_WORK_INT = 2;
+    public static int PHONE_MORE_INT = 3;
     public static Bitmap redCircle;
     public static Bitmap imgCall;
     public static Bitmap imgSMS;

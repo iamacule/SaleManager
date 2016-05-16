@@ -144,13 +144,14 @@ public class AddPrivateActivity extends AppCompatActivity {
             ContentValues contentValues = Database.getInstance().createPrivate(DataUtil.privateData);
             DataUtil.privateData.idPrivate = (int) Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PRIVATE);
 
+
             //Create and insert Phone
             DataUtil.phoneData = new Phone();
             DataUtil.phoneData.isCompany = 0;
             DataUtil.phoneData.idPrivate = DataUtil.privateData.idPrivate;
             DataUtil.phoneData.number = etPhone.getText().toString().trim();
             DataUtil.phoneData.idCompany = 0;
-            DataUtil.phoneData.note = "";
+            DataUtil.phoneData.note = DataUtil.PHONE_MOBILE_INT;
             contentValues = Database.getInstance().createPhone(DataUtil.phoneData);
             Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PHONE);
             Database.getInstance().close();

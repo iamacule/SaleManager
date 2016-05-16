@@ -33,6 +33,10 @@ public class SplashScreen extends AppCompatActivity {
         DataUtil.redCircle = ResizeBitmap.resize(BitmapFactory.decodeResource(getResources(), R.drawable.red_circle), DataUtil.screenWidth / 8);
         DataUtil.imgSMS = ResizeBitmap.resize(BitmapFactory.decodeResource(getResources(), R.drawable.sms), DataUtil.screenWidth / 14);
         DataUtil.imgCall = ResizeBitmap.resize(BitmapFactory.decodeResource(getResources(), R.drawable.call), DataUtil.screenWidth / 12);
+        DataUtil.PHONE_HOME = getString(R.string.home);
+        DataUtil.PHONE_MOBILE = getString(R.string.mobile);
+        DataUtil.PHONE_WORK = getString(R.string.work);
+        DataUtil.PHONE_MORE = getString(R.string.order);
         Database.setUp(getApplicationContext());
     }
 
