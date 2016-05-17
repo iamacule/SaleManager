@@ -225,7 +225,6 @@ public class Database {
         contentValues = new ContentValues();
         contentValues.clear();
         contentValues.put(PERSON_NAME, data.name);
-        Log.d(Tag.AddPrivateActivity,data.name);
         contentValues.put(PERSON_EMAIL, data.email);
         contentValues.put(PERSON_NOTE, data.note);
         contentValues.put(PERSON_SEX, data.sex);

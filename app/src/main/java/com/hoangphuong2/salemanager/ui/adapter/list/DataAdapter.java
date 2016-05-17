@@ -75,13 +75,11 @@ public class DataAdapter extends RecyclerView.Adapter<DataHolder> {
     private void action(Person aPerson, boolean isCall) {
 
         if (aPerson.listPhone.size() > 0) {
-            if (aPerson.listPhone.size() == 1) {
-                phoneNumber = aPerson.listPhone.get(0).number;
-                if (!isCall) {
-                    phoneHelper.message(phoneNumber, "");
-                } else {
-                    phoneHelper.dial(phoneNumber);
-                }
+            phoneNumber = aPerson.listPhone.get(0).number;
+            if (!isCall) {
+                phoneHelper.message(phoneNumber, "");
+            } else {
+                phoneHelper.dial(phoneNumber);
             }
         } else {
             Boast.makeText(activity, activity.getString(R.string.private_no_phone)).show();

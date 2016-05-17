@@ -476,6 +476,9 @@ public class AddPrivateActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
 
             Database.getInstance().open();
+            List<Person> listPersonCurrent = new ArrayList<>();
+            List<Phone> listPhoneCurrent = new ArrayList<>();
+            listPersonCurrent = Database.getInstance().getAllPerson();
             ContentResolver cr = getContentResolver();
             Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
                     null, null, null, null);
@@ -492,21 +495,21 @@ public class AddPrivateActivity extends AppCompatActivity {
                     if (name != null && !name.equals("")) {
                         person.name = name.trim();
                         if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-//                        Log.d(Tag.AddPrivateActivity,name);
-
                             // get the phone number
                             Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                                     ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
                                     new String[]{id}, null);
                             while (pCur.moveToNext()) {
-                                Phone phone = new Phone();
                                 String phoneNumber = pCur.getString(
                                         pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                                phone.number = phoneNumber;
-                                phone.isCompany = 0;
-                                phone.idCompany = 0;
-                                phone.note = DataUtil.PHONE_MOBILE_INT;
-                                listPhone.add(phone);
+                                if (phoneNumber != null && !phoneNumber.equals("")) {
+                                    Phone phone = new Phone();
+                                    phone.number = phoneNumber;
+                                    phone.isCompany = 0;
+                                    phone.idCompany = 0;
+                                    phone.note = DataUtil.PHONE_MOBILE_INT;
+                                    listPhone.add(phone);
+                                }
                             }
                             pCur.close();
                             person.listPhone = listPhone;
@@ -531,15 +534,23 @@ public class AddPrivateActivity extends AppCompatActivity {
                         }
                         person.note = AddPrivateActivity.this.getString(R.string.import_from_contacts);
 
-                        //Insert to Database
-                        ContentValues contentValues = Database.getInstance().createPerson(person);
-                        int idPerson = (int) Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PERSON);
-
-                        //Create and insert Phone
-                        for (Phone phone : listPhone) {
-                            phone.idPerson = idPerson;
-                            contentValues = Database.getInstance().createPhone(phone);
-                            Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PHONE);
+                        boolean isDataPersonExist = false;
+                        ContentValues contentValues;
+                        for (Person p : listPersonCurrent) {
+                            if (p.name.equals(person.name)) {
+                                isDataPersonExist = true;
+                            }
+                        }
+                        if (!isDataPersonExist) {
+                            //Insert to Database
+                            contentValues = Database.getInstance().createPerson(person);
+                            int idPerson = (int) Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PERSON);
+                            //Create and insert Phone
+                            for (Phone phone : listPhone) {
+                                phone.idPerson = idPerson;
+                                contentValues = Database.getInstance().createPhone(phone);
+                                Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PHONE);
+                            }
                         }
                     }
                 }

@@ -28,11 +28,11 @@
     <string name="confirm">Xác nhận</string>
     <string name="cancel">Từ chối</string>
     <string name="ask_read_contact">Cho phép ứng dụng truy cập đến danh bạ của bạn để thực hiện tác vụ này ?</string>
-    <string name="import_from_contact">Nhập từ Danh bạ</string>
+    <string name="import_from_contact">Cập nhật từ Danh bạ Điện thoại</string>
     <string name="loading">Xin chờ ... </string>
     <string name="contacting_google">Đang liên hệ với Google ... </string>
     <string name="get_contact">Đã chứng thực . Đang tải Google Danh Bạ ... </string>
-    <string name="get_contact_phone">Đang tải Danh Bạ ... </string>
+    <string name="get_contact_phone">Đang cập nhật danh bạ điện thoại ... </string>
     <string name="get_contact_fail">Đã xảy ra lỗi khi tải Danh bạ</string>
     <string name="no_contact_found">Không tìm thấy danh bạ</string>
     <string name="import_from_contacts">Nhập từ danh bạ điện thoại</string>

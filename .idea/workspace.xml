@@ -10,20 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51d9db85-282f-4e5d-9196-b9b77a7439b1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/data/sqlite/Database.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/data/sqlite/Database.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Address.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Address.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Bill.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Bill.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Phone.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Phone.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Sale.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Sale.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/activity/AddPrivateActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/activity/AddPrivateActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/adapter/list/DataAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/adapter/list/DataAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/fragment/FragmentPrivate.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/fragment/FragmentPrivate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/util/DataUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/util/DataUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-vi/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-vi/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Private.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Person.java" />
     </list>
     <ignored path="SaleManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,8 +39,8 @@
       <file leaf-file-name="Database.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/data/sqlite/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.8965516">
-              <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+            <state vertical-scroll-proportion="4.4827585">
+              <caret line="226" column="50" selection-start-line="226" selection-start-column="50" selection-end-line="226" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -57,8 +49,8 @@
       <file leaf-file-name="AddPrivateActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/activity/AddPrivateActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="25.586206">
-              <caret line="494" column="60" selection-start-line="494" selection-start-column="60" selection-end-line="494" selection-end-column="60" />
+            <state vertical-scroll-proportion="-7.4827585">
+              <caret line="95" column="46" selection-start-line="95" selection-start-column="46" selection-end-line="95" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#6300#6336#0" expanded="true" />
@@ -77,10 +69,23 @@
                 <element signature="e#18911#18912#0" expanded="true" />
                 <element signature="e#18944#18945#0" expanded="true" />
                 <element signature="e#19101#19162#0" expanded="true" />
-                <element signature="e#22556#22620#0" expanded="true" />
-                <element signature="e#23880#23946#0" expanded="true" />
+                <element signature="e#22834#22898#0" expanded="true" />
+                <element signature="e#24604#24670#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_add_private.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_private.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.563637">
+              <caret line="437" column="58" selection-start-line="437" selection-start-column="58" selection-end-line="437" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -108,11 +113,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FragmentPrivate.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FragmentPrivate.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/fragment/FragmentPrivate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48140043">
-              <caret line="75" column="44" selection-start-line="75" selection-start-column="44" selection-end-line="75" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -121,8 +126,8 @@
       <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values-vi/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.735849">
-              <caret line="38" column="54" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
+            <state vertical-scroll-proportion="-10.509434">
+              <caret line="34" column="69" selection-start-line="34" selection-start-column="69" selection-end-line="34" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -132,17 +137,17 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/adapter/list/DataAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="70" column="48" selection-start-line="70" selection-start-column="48" selection-end-line="70" selection-end-column="48" />
+              <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.735849">
-              <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="76" />
+            <state vertical-scroll-proportion="1.0420792">
+              <caret line="26" column="39" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -1875,7 +1880,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/api/GoogleConstants.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/auth_dialog.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/dialog/DialogRequestGoogleContacts.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/adapter/list/DataAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Private.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Address.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Bill.java" />
@@ -1884,12 +1888,13 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_info.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/dialog/DialogInfo.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/util/DataUtil.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values-vi/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/data/sqlite/Database.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/model/Person.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/activity/AddPrivateActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/fragment/FragmentPrivate.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/adapter/list/DataAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/activity/AddPrivateActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/data/sqlite/Database.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values-vi/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       </list>
     </option>
   </component>
@@ -2314,24 +2319,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="api" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SaleManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SaleManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="libs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2855,67 +2842,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_private.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.017128">
-          <caret line="439" column="35" selection-start-line="439" selection-start-column="35" selection-end-line="439" selection-end-column="35" />
-          <folding>
-            <element signature="e#562#595#0" expanded="true" />
-            <element signature="e#628#663#0" expanded="true" />
-            <element signature="e#697#732#0" expanded="true" />
-            <element signature="e#764#797#0" expanded="true" />
-            <element signature="e#975#1010#0" expanded="true" />
-            <element signature="e#1052#1087#0" expanded="true" />
-            <element signature="e#1765#1787#0" expanded="true" />
-            <element signature="e#2086#2108#0" expanded="true" />
-            <element signature="e#2243#2257#0" expanded="true" />
-            <element signature="e#2615#2637#0" expanded="true" />
-            <element signature="e#3267#3289#0" expanded="true" />
-            <element signature="e#3612#3634#0" expanded="true" />
-            <element signature="e#3781#3798#0" expanded="true" />
-            <element signature="e#4187#4209#0" expanded="true" />
-            <element signature="e#4583#4605#0" expanded="true" />
-            <element signature="e#4904#4926#0" expanded="true" />
-            <element signature="e#5061#5076#0" expanded="true" />
-            <element signature="e#5435#5457#0" expanded="true" />
-            <element signature="e#6137#6159#0" expanded="true" />
-            <element signature="e#6504#6526#0" expanded="true" />
-            <element signature="e#6983#7005#0" expanded="true" />
-            <element signature="e#7636#7658#0" expanded="true" />
-            <element signature="e#8003#8025#0" expanded="true" />
-            <element signature="e#8482#8504#0" expanded="true" />
-            <element signature="e#9135#9157#0" expanded="true" />
-            <element signature="e#9502#9524#0" expanded="true" />
-            <element signature="e#9981#10003#0" expanded="true" />
-            <element signature="e#10634#10656#0" expanded="true" />
-            <element signature="e#11001#11023#0" expanded="true" />
-            <element signature="e#11480#11502#0" expanded="true" />
-            <element signature="e#12382#12404#0" expanded="true" />
-            <element signature="e#12727#12749#0" expanded="true" />
-            <element signature="e#12896#12911#0" expanded="true" />
-            <element signature="e#13297#13319#0" expanded="true" />
-            <element signature="e#14058#14080#0" expanded="true" />
-            <element signature="e#14403#14425#0" expanded="true" />
-            <element signature="e#14572#14585#0" expanded="true" />
-            <element signature="e#15342#15369#0" expanded="true" />
-            <element signature="e#15470#15484#0" expanded="true" />
-            <element signature="e#15886#15902#0" expanded="true" />
-            <element signature="e#16560#16582#0" expanded="true" />
-            <element signature="e#16905#16927#0" expanded="true" />
-            <element signature="e#17074#17088#0" expanded="true" />
-            <element signature="e#17474#17496#0" expanded="true" />
-            <element signature="e#18116#18138#0" expanded="true" />
-            <element signature="e#18809#18823#0" expanded="true" />
-            <element signature="e#19445#19469#0" expanded="true" />
-            <element signature="e#19778#19800#0" expanded="true" />
-            <element signature="e#20426#20455#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.29040736">
@@ -3164,34 +3090,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.735849">
-          <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-vi/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.735849">
-          <caret line="38" column="54" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/util/DataUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/adapter/list/DataAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="48" selection-start-line="70" selection-start-column="48" selection-end-line="70" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -3227,18 +3129,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/fragment/FragmentPrivate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/adapter/list/DataAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/data/sqlite/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.8965516">
-          <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+        <state vertical-scroll-proportion="4.4827585">
+          <caret line="226" column="50" selection-start-line="226" selection-start-column="50" selection-end-line="226" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/activity/AddPrivateActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="25.586206">
-          <caret line="494" column="60" selection-start-line="494" selection-start-column="60" selection-end-line="494" selection-end-column="60" />
+        <state vertical-scroll-proportion="-7.4827585">
+          <caret line="95" column="46" selection-start-line="95" selection-start-column="46" selection-end-line="95" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#6300#6336#0" expanded="true" />
@@ -3257,16 +3175,35 @@
             <element signature="e#18911#18912#0" expanded="true" />
             <element signature="e#18944#18945#0" expanded="true" />
             <element signature="e#19101#19162#0" expanded="true" />
-            <element signature="e#22556#22620#0" expanded="true" />
-            <element signature="e#23880#23946#0" expanded="true" />
+            <element signature="e#22834#22898#0" expanded="true" />
+            <element signature="e#24604#24670#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hoangphuong2/salemanager/ui/fragment/FragmentPrivate.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_private.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48140043">
-          <caret line="75" column="44" selection-start-line="75" selection-start-column="44" selection-end-line="75" selection-end-column="44" />
+        <state vertical-scroll-proportion="-12.563637">
+          <caret line="437" column="58" selection-start-line="437" selection-start-column="58" selection-end-line="437" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-vi/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.509434">
+          <caret line="34" column="69" selection-start-line="34" selection-start-column="69" selection-end-line="34" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0420792">
+          <caret line="26" column="39" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
           <folding />
         </state>
       </provider>
