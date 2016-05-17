@@ -25,4 +25,8 @@
     <string name="mobile">Mobile</string>
     <string name="work">Work</string>
     <string name="order">Order</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="ask_read_contact">Let our access your contacts to perform this action ?</string>
+    <string name="import_from_contact">Import from Contacts</string>
 </resources>

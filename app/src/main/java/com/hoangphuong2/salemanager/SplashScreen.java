@@ -1,8 +1,11 @@
 package com.hoangphuong2.salemanager;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +15,7 @@ import com.hoangphuong2.salemanager.data.sqlite.Database;
 import com.hoangphuong2.salemanager.ui.activity.MainActivity;
 import com.hoangphuong2.salemanager.ui.activity.StartActivity;
 import com.hoangphuong2.salemanager.util.DataUtil;
+import com.hoangphuong2.salemanager.util.PermissionUtil;
 import com.hoangphuong2.salemanager.util.ResizeBitmap;
 import com.hoangphuong2.salemanager.util.ScreenUtil;
 import com.hoangphuong2.salemanager.util.Tag;
@@ -19,6 +23,7 @@ import com.hoangphuong2.salemanager.util.Tag;
 public class SplashScreen extends AppCompatActivity {
     private String ownerName;
     private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,18 +42,19 @@ public class SplashScreen extends AppCompatActivity {
         DataUtil.PHONE_MOBILE = getString(R.string.mobile);
         DataUtil.PHONE_WORK = getString(R.string.work);
         DataUtil.PHONE_MORE = getString(R.string.order);
+        PermissionUtil.permissionReadContacts = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED ? true : false;
         Database.setUp(getApplicationContext());
     }
 
     private void initActivity() {
-        if(ownerName!=null){
+        if (ownerName != null) {
             intent = new Intent(this, MainActivity.class);
-            Log.d(Tag.SplashScreen,"Name is config,go to Main");
-        }else {
+            Log.d(Tag.SplashScreen, "Name is config,go to Main");
+        } else {
             intent = new Intent(this, StartActivity.class);
-            Log.d(Tag.SplashScreen,"Name is not config,go to Start");
+            Log.d(Tag.SplashScreen, "Name is not config,go to Start");
         }
-        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         startActivity(intent);
     }
 }

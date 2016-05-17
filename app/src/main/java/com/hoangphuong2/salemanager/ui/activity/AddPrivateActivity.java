@@ -1,14 +1,15 @@
 package com.hoangphuong2.salemanager.ui.activity;
 
+import android.Manifest;
 import android.content.ContentValues;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.Patterns;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,15 +19,15 @@ import android.widget.RadioButton;
 
 import com.hoangphuong2.salemanager.R;
 import com.hoangphuong2.salemanager.data.sqlite.Database;
+import com.hoangphuong2.salemanager.dialog.DialogAsk;
 import com.hoangphuong2.salemanager.model.Phone;
 import com.hoangphuong2.salemanager.model.Private;
 import com.hoangphuong2.salemanager.ui.control.OnSingleClickListener;
 import com.hoangphuong2.salemanager.ui.toast.Boast;
 import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
 import com.hoangphuong2.salemanager.util.DataUtil;
+import com.hoangphuong2.salemanager.util.PermissionUtil;
 import com.hoangphuong2.salemanager.util.ResizeBitmap;
-
-import java.util.regex.Pattern;
 
 /**
  * Created by MrAn on 16-May-16.
@@ -53,6 +54,7 @@ public class AddPrivateActivity extends AppCompatActivity {
     private ImageView imgLogo;
     private Bitmap bpAdd;
     private Button btnSave;
+    private Button btnImport;
     private RadioButton radioMale;
     private RadioButton radioFemale;
 
@@ -72,6 +74,7 @@ public class AddPrivateActivity extends AppCompatActivity {
         etNote = (EditText) findViewById(R.id.etNote);
         etMail = (EditText) findViewById(R.id.etMail);
         btnSave = (Button) findViewById(R.id.btnSave);
+        btnImport = (Button) findViewById(R.id.btnImport);
         radioMale = (RadioButton) findViewById(R.id.radioMale);
         radioFemale = (RadioButton) findViewById(R.id.radioFemale);
 
@@ -108,6 +111,9 @@ public class AddPrivateActivity extends AppCompatActivity {
                     case R.id.radioFemale:
                         sex = FEMALE;
                         break;
+                    case R.id.btnImport:
+                        prepareImport();
+                        break;
                 }
             }
         };
@@ -115,6 +121,56 @@ public class AddPrivateActivity extends AppCompatActivity {
         btnSave.setOnClickListener(click);
         radioMale.setOnClickListener(click);
         radioFemale.setOnClickListener(click);
+        btnImport.setOnClickListener(click);
+    }
+
+    private void prepareImport() {
+        if (PermissionUtil.permissionReadContacts) {
+            importContacts();
+        } else {
+            showDialogAskPermission();
+        }
+    }
+
+    private void importContacts() {
+
+    }
+
+    private void showDialogAskPermission() {
+        DialogAsk.createDialog(this, getString(R.string.ask_read_contact));
+        DialogAsk.btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogAsk.dialog.dismiss();
+                if (!PermissionUtil.permissionReadContacts) {
+                    PermissionUtil.request(AddPrivateActivity.this, Manifest.permission.READ_CONTACTS, PermissionUtil.READ_CONTACTS);
+                }
+            }
+        });
+        DialogAsk.btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogAsk.dialog.dismiss();
+            }
+        });
+        DialogAsk.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PermissionUtil.READ_CONTACTS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    PermissionUtil.permissionReadContacts = true;
+                } else {
+                    PermissionUtil.permissionReadContacts = false;
+                }
+                return;
+            }
+        }
     }
 
     private void saveData() {
