@@ -6,17 +6,17 @@ package com.hoangphuong2.salemanager.model;
 public class Phone {
     public String number;
     public int note;
-    public int idPrivate;
+    public int idPerson;
     public int idCompany;
     public int isCompany;
 
     public Phone() {
     }
 
-    public Phone(String number, int note, int idPrivate, int idCompany, int isCompany) {
+    public Phone(String number, int note, int idPerson, int idCompany, int isCompany) {
         this.number = number;
         this.note = note;
-        this.idPrivate = idPrivate;
+        this.idPerson = idPerson;
         this.idCompany = idCompany;
         this.isCompany = isCompany;
     }

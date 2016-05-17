@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.hoangphuong2.salemanager.R;
 import com.hoangphuong2.salemanager.data.sqlite.Database;
-import com.hoangphuong2.salemanager.model.Private;
+import com.hoangphuong2.salemanager.model.Person;
 import com.hoangphuong2.salemanager.ui.activity.MainActivity;
 import com.hoangphuong2.salemanager.ui.adapter.list.DataAdapter;
 import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
@@ -28,7 +28,7 @@ import java.util.List;
 public class FragmentPrivate extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayout lnOption;
-    private List<Private> listData;
+    private List<Person> listData;
     private DataAdapter dataAdapter;
     private TextView txtNoData;
 
@@ -49,8 +49,8 @@ public class FragmentPrivate extends Fragment {
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         Database.getInstance().open();
-        listData = Database.getInstance().getAllPrivate();
-        Collections.sort(listData,Private.COMPARE_BY_NAME);
+        listData = Database.getInstance().getAllPerson();
+        Collections.sort(listData, Person.COMPARE_BY_NAME);
         Database.getInstance().close();
         showHideNodata(listData.size());
         dataAdapter = new DataAdapter(getActivity(),listData);
@@ -63,9 +63,19 @@ public class FragmentPrivate extends Fragment {
         super.onResume();
         if(DataUtil.needAddNew){
             DataUtil.needAddNew = false;
-            listData.add(DataUtil.privateData);
-            Collections.sort(listData,Private.COMPARE_BY_NAME);
+            listData.add(DataUtil.personData);
+            Collections.sort(listData, Person.COMPARE_BY_NAME);
             dataAdapter.notifyDataSetChanged();
+        }
+        if(DataUtil.needRefresh){
+            DataUtil.needRefresh = false;
+            Database.getInstance().open();
+            listData = Database.getInstance().getAllPerson();
+            Collections.sort(listData, Person.COMPARE_BY_NAME);
+            Database.getInstance().close();
+            showHideNodata(listData.size());
+            dataAdapter = new DataAdapter(getActivity(),listData);
+            recyclerView.setAdapter(dataAdapter);
         }
     }
 

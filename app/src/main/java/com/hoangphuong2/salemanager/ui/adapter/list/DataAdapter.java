@@ -1,19 +1,14 @@
 package com.hoangphuong2.salemanager.ui.adapter.list;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hoangphuong2.salemanager.R;
-import com.hoangphuong2.salemanager.data.sqlite.Database;
 import com.hoangphuong2.salemanager.helper.PhoneHelper;
-import com.hoangphuong2.salemanager.model.Phone;
-import com.hoangphuong2.salemanager.model.Private;
+import com.hoangphuong2.salemanager.model.Person;
 import com.hoangphuong2.salemanager.ui.control.OnSingleClickListener;
 import com.hoangphuong2.salemanager.ui.toast.Boast;
 import com.hoangphuong2.salemanager.util.DataUtil;
@@ -24,12 +19,12 @@ import java.util.List;
  * Created by MrAn on 13-May-16.
  */
 public class DataAdapter extends RecyclerView.Adapter<DataHolder> {
-    private List<Private> listData;
+    private List<Person> listData;
     private Activity activity;
     private String phoneNumber;
     private PhoneHelper phoneHelper;
 
-    public DataAdapter(Activity activity, List<Private> listData) {
+    public DataAdapter(Activity activity, List<Person> listData) {
         this.activity = activity;
         this.listData = listData;
         phoneHelper = new PhoneHelper(activity);
@@ -43,31 +38,31 @@ public class DataAdapter extends RecyclerView.Adapter<DataHolder> {
         return dataHolder;
     }
 
-    private Private getItem(int pos) {
+    private Person getItem(int pos) {
         return listData.get(pos);
     }
 
     @Override
     public void onBindViewHolder(DataHolder holder, int position) {
-        final Private aPrivate = getItem(position);
+        final Person aPerson = getItem(position);
         holder.imgAvatar.setImageBitmap(DataUtil.redCircle);
         holder.imgSMS.setImageBitmap(DataUtil.imgSMS);
         holder.imgCall.setImageBitmap(DataUtil.imgCall);
-        holder.txtAvatar.setText(Character.toString(aPrivate.name.charAt(0)).toUpperCase());
-        holder.txtName.setText(aPrivate.name);
-        setOnClick(holder, aPrivate);
+        holder.txtAvatar.setText(Character.toString(aPerson.name.charAt(0)).toUpperCase());
+        holder.txtName.setText(aPerson.name);
+        setOnClick(holder, aPerson);
     }
 
-    private void setOnClick(final DataHolder holder, final Private aPrivate) {
+    private void setOnClick(final DataHolder holder, final Person aPerson) {
         OnSingleClickListener click = new OnSingleClickListener(100) {
             @Override
             public void onSingleClick(View v) {
                 switch (v.getId()) {
                     case R.id.imgSMS:
-                        action(aPrivate, false);
+                        action(aPerson, false);
                         break;
                     case R.id.imgCall:
-                        action(aPrivate, true);
+                        action(aPerson, true);
                         break;
                 }
             }
@@ -77,13 +72,11 @@ public class DataAdapter extends RecyclerView.Adapter<DataHolder> {
         holder.imgCall.setOnClickListener(click);
     }
 
-    private void action(Private aPrivate, boolean isCall) {
-        Database.getInstance().open();
-        List<Phone> listPhone = Database.getInstance().getAllPhoneOfPerson(aPrivate.idPrivate);
-        Database.getInstance().close();
-        if (listPhone.size() > 0) {
-            if (listPhone.size() == 1) {
-                phoneNumber = listPhone.get(0).number;
+    private void action(Person aPerson, boolean isCall) {
+
+        if (aPerson.listPhone.size() > 0) {
+            if (aPerson.listPhone.size() == 1) {
+                phoneNumber = aPerson.listPhone.get(0).number;
                 if (!isCall) {
                     phoneHelper.message(phoneNumber, "");
                 } else {

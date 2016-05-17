@@ -6,7 +6,7 @@ package com.hoangphuong2.salemanager.model;
 public class Bill {
     public int number;
     public int idCompany;
-    public int idPrivate;
+    public int idPerson;
     public long date;
     public int total;
     public int payed;
@@ -16,10 +16,10 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(int number, int idCompany, int idPrivate, long date, int total, int payed, int payType, String note) {
+    public Bill(int number, int idCompany, int idPerson, long date, int total, int payed, int payType, String note) {
         this.number = number;
         this.idCompany = idCompany;
-        this.idPrivate = idPrivate;
+        this.idPerson = idPerson;
         this.date = date;
         this.total = total;
         this.payed = payed;

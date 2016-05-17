@@ -6,17 +6,17 @@ package com.hoangphuong2.salemanager.model;
 public class Sale {
     public int idItem;
     public int idCompany;
-    public int idPrivate;
+    public int idPerson;
     public int price;
     public String note;
 
     public Sale() {
     }
 
-    public Sale(int idItem, int idCompany, int idPrivate, int price, String note) {
+    public Sale(int idItem, int idCompany, int idPerson, int price, String note) {
         this.idItem = idItem;
         this.idCompany = idCompany;
-        this.idPrivate = idPrivate;
+        this.idPerson = idPerson;
         this.price = price;
         this.note = note;
     }

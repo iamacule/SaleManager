@@ -6,7 +6,7 @@ package com.hoangphuong2.salemanager.model;
 public class Address {
     public int idAddress;
     public String address;
-    public int idPrivate;
+    public int idPerson;
     public int idCompany;
     public int isCompany;
     public int isBillAddress;
@@ -15,10 +15,10 @@ public class Address {
     public Address() {
     }
 
-    public Address(int idAddress, String address, int idPrivate, int idCompany, int isCompany, int isBillAddress,String note) {
+    public Address(int idAddress, String address, int idPerson, int idCompany, int isCompany, int isBillAddress, String note) {
         this.idAddress = idAddress;
         this.address = address;
-        this.idPrivate = idPrivate;
+        this.idPerson = idPerson;
         this.idCompany = idCompany;
         this.isCompany = isCompany;
         this.isBillAddress = isBillAddress;

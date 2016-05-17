@@ -14,7 +14,7 @@ import com.hoangphuong2.salemanager.model.Company;
 import com.hoangphuong2.salemanager.model.Item;
 import com.hoangphuong2.salemanager.model.ItemType;
 import com.hoangphuong2.salemanager.model.Phone;
-import com.hoangphuong2.salemanager.model.Private;
+import com.hoangphuong2.salemanager.model.Person;
 import com.hoangphuong2.salemanager.model.Sale;
 import com.hoangphuong2.salemanager.util.Tag;
 
@@ -33,20 +33,20 @@ public class Database {
     private static Database instance;
 
     private final String DATABASE_NAME = "SALE_MANAGER";
-    public final String DATABASE_TABLE_PRIVATE = "DATABASE_TABLE_PRIVATE";
-    private final String DATABASE_CREATE_PRIVATE = "CREATE TABLE DATABASE_TABLE_PRIVATE (" +
-            "PRIVATE_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "PRIVATE_NAME TEXT," +
-            "PRIVATE_EMAIL TEXT," +
-            "PRIVATE_NOTE TEXT," +
-            "PRIVATE_SEX INT," +
+    public final String DATABASE_TABLE_PERSON = "DATABASE_TABLE_PERSON";
+    private final String DATABASE_CREATE_PERSON = "CREATE TABLE DATABASE_TABLE_PERSON (" +
+            "PERSON_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "PERSON_NAME TEXT," +
+            "PERSON_EMAIL TEXT," +
+            "PERSON_NOTE TEXT," +
+            "PERSON_SEX INT," +
             "COMPANY_ID INT);";
 
     public final String DATABASE_TABLE_PHONE = "DATABASE_TABLE_PHONE";
     private final String DATABASE_CREATE_PHONE = "CREATE TABLE DATABASE_TABLE_PHONE (" +
-            "PHONE_NUMBER INTEGER PRIMARY KEY," +
+            "PHONE_NUMBER TEXT PRIMARY KEY," +
             "PHONE_NOTE INT," +
-            "PRIVATE_ID INT," +
+            "PERSON_ID INT," +
             "COMPANY_ID INT," +
             "IS_COMPANY INT);";
 
@@ -54,7 +54,7 @@ public class Database {
     private final String DATABASE_CREATE_ADDRESS = "CREATE TABLE DATABASE_TABLE_ADDRESS (" +
             "ADDRESS_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "ADDRESS TEXT," +
-            "PRIVATE_ID INT," +
+            "PERSON_ID INT," +
             "COMPANY_ID INT," +
             "IS_BILL_ADDRESS INT," +
             "ADDRESS_NOTE TEXT," +
@@ -84,7 +84,7 @@ public class Database {
     public final String DATABASE_TABLE_SALE = "DATABASE_TABLE_SALE";
     private final String DATABASE_CREATE_SALE = "CREATE TABLE DATABASE_TABLE_SALE (" +
             "ITEM_ID INTEGER," +
-            "PRIVATE_ID INT," +
+            "PERSON_ID INT," +
             "COMPANY_ID INT," +
             "SALE_PRICE TEXT," +
             "SALE_NOTE TEXT);";
@@ -92,7 +92,7 @@ public class Database {
     public final String DATABASE_TABLE_BILL = "DATABASE_TABLE_BILL";
     private final String DATABASE_CREATE_BILL = "CREATE TABLE DATABASE_TABLE_BILL (" +
             "BILL_NUMBER INTEGER PRIMARY KEY," +
-            "PRIVATE_ID INT," +
+            "PERSON_ID INT," +
             "COMPANY_ID INT," +
             "BILL_DATE TEXT," +
             "BILL_TOTAL INT," +
@@ -102,11 +102,11 @@ public class Database {
 
 
     //Define Column name
-    public final String PRIVATE_ID = "PRIVATE_ID";
-    public final String PRIVATE_NAME = "PRIVATE_NAME";
-    public final String PRIVATE_EMAIL = "PRIVATE_EMAIL";
-    public final String PRIVATE_NOTE = "PRIVATE_NOTE";
-    public final String PRIVATE_SEX = "PRIVATE_SEX";
+    public final String PERSON_ID = "PERSON_ID";
+    public final String PERSON_NAME = "PERSON_NAME";
+    public final String PERSON_EMAIL = "PERSON_EMAIL";
+    public final String PERSON_NOTE = "PERSON_NOTE";
+    public final String PERSON_SEX = "PERSON_SEX";
     public final String COMPANY_ID = "COMPANY_ID";
 
     public final String PHONE_NUMBER = "PHONE_NUMBER";
@@ -159,7 +159,7 @@ public class Database {
             db.execSQL(DATABASE_CREATE_ITEM);
             db.execSQL(DATABASE_CREATE_ITEM_TYPE);
             db.execSQL(DATABASE_CREATE_PHONE);
-            db.execSQL(DATABASE_CREATE_PRIVATE);
+            db.execSQL(DATABASE_CREATE_PERSON);
             db.execSQL(DATABASE_CREATE_SALE);
         }
 
@@ -173,7 +173,7 @@ public class Database {
             db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_ITEM);
             db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_ITEM_TYPE);
             db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_PHONE);
-            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_PRIVATE);
+            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_CREATE_PERSON);
             db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_SALE);
             db.execSQL(DATABASE_CREATE_ADDRESS);
             db.execSQL(DATABASE_CREATE_BILL);
@@ -181,7 +181,7 @@ public class Database {
             db.execSQL(DATABASE_CREATE_ITEM);
             db.execSQL(DATABASE_CREATE_ITEM_TYPE);
             db.execSQL(DATABASE_CREATE_PHONE);
-            db.execSQL(DATABASE_CREATE_PRIVATE);
+            db.execSQL(DATABASE_CREATE_PERSON);
             db.execSQL(DATABASE_CREATE_SALE);
             db.setVersion(newVersion);
         }
@@ -221,13 +221,14 @@ public class Database {
         }
     }
 
-    public ContentValues createPrivate(Private data) {
+    public ContentValues createPerson(Person data) {
         contentValues = new ContentValues();
         contentValues.clear();
-        contentValues.put(PRIVATE_NAME, data.name);
-        contentValues.put(PRIVATE_EMAIL, data.email);
-        contentValues.put(PRIVATE_NOTE, data.note);
-        contentValues.put(PRIVATE_SEX, data.sex);
+        contentValues.put(PERSON_NAME, data.name);
+        Log.d(Tag.AddPrivateActivity,data.name);
+        contentValues.put(PERSON_EMAIL, data.email);
+        contentValues.put(PERSON_NOTE, data.note);
+        contentValues.put(PERSON_SEX, data.sex);
         contentValues.put(COMPANY_ID, data.idCompany);
         return contentValues;
     }
@@ -237,7 +238,7 @@ public class Database {
         contentValues.clear();
         contentValues.put(PHONE_NUMBER, data.number);
         contentValues.put(PHONE_NOTE, data.note);
-        contentValues.put(PRIVATE_ID, data.idPrivate);
+        contentValues.put(PERSON_ID, data.idPerson);
         contentValues.put(COMPANY_ID, data.isCompany);
         contentValues.put(IS_COMPANY, data.isCompany);
         return contentValues;
@@ -247,7 +248,7 @@ public class Database {
         contentValues = new ContentValues();
         contentValues.clear();
         contentValues.put(ADDRESS, data.address);
-        contentValues.put(PRIVATE_ID, data.idPrivate);
+        contentValues.put(PERSON_ID, data.idPerson);
         contentValues.put(COMPANY_ID, data.idCompany);
         contentValues.put(IS_BILL_ADDRESS, data.isBillAddress);
         contentValues.put(IS_COMPANY, data.isCompany);
@@ -287,7 +288,7 @@ public class Database {
         contentValues = new ContentValues();
         contentValues.clear();
         contentValues.put(ITEM_ID, data.idItem);
-        contentValues.put(PRIVATE_ID, data.idPrivate);
+        contentValues.put(PERSON_ID, data.idPerson);
         contentValues.put(COMPANY_ID, data.idCompany);
         contentValues.put(SALE_PRICE, data.price);
         contentValues.put(SALE_NOTE, data.note);
@@ -298,7 +299,7 @@ public class Database {
         contentValues = new ContentValues();
         contentValues.clear();
         contentValues.put(BILL_NUMBER, data.number);
-        contentValues.put(PRIVATE_ID, data.idPrivate);
+        contentValues.put(PERSON_ID, data.idPerson);
         contentValues.put(COMPANY_ID, data.idCompany);
         contentValues.put(BILL_DATE, data.date);
         contentValues.put(BILL_TOTAL, data.total);
@@ -324,28 +325,31 @@ public class Database {
             idInsert = mDB.insertWithOnConflict(table, null,
                     contentValues, SQLiteDatabase.CONFLICT_IGNORE);
             mDB.setTransactionSuccessful();
+            Log.d(Tag.Database,"Insert success");
         } catch (Exception e) {
             mDB = mDBHelper.getReadableDatabase();
+            Log.d(Tag.Database,"Insert fail");
         } finally {
             mDB.endTransaction();
         }
         return idInsert;
     }
 
-    public Private getPrivate(int id) {
+    public Person getPerson(int id) {
         Cursor mCursor = null;
-        Private data = new Private();
+        Person data = new Person();
         try {
-            mCursor = mDB.query(true, DATABASE_TABLE_PRIVATE
-                    , new String[]{PRIVATE_ID, PRIVATE_NAME, PRIVATE_EMAIL, PRIVATE_SEX, PRIVATE_NOTE}
-                    , PRIVATE_ID + " = " + id, null, null, null, null, null);
+            mCursor = mDB.query(true, DATABASE_TABLE_PERSON
+                    , new String[]{PERSON_ID, PERSON_NAME, PERSON_EMAIL, PERSON_SEX, PERSON_NOTE}
+                    , PERSON_ID + " = " + id, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
-                    data.idPrivate = mCursor.getInt(0);
+                    data.idPerson = mCursor.getInt(0);
                     data.name = mCursor.getString(1);
                     data.email = mCursor.getString(2);
                     data.sex = mCursor.getInt(3);
                     data.note = mCursor.getString(4);
+                    data.listPhone = getAllPhoneOfPerson(data.idPerson);
                 } while (mCursor.moveToNext());
             }
         } finally {
@@ -354,21 +358,22 @@ public class Database {
         return data;
     }
 
-    public List<Private> getAllPrivate() {
+    public List<Person> getAllPerson() {
         Cursor mCursor = null;
-        List<Private> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         try {
-            mCursor = mDB.query(true, DATABASE_TABLE_PRIVATE
-                    , new String[]{PRIVATE_ID, PRIVATE_NAME, PRIVATE_EMAIL, PRIVATE_SEX, PRIVATE_NOTE}
+            mCursor = mDB.query(true, DATABASE_TABLE_PERSON
+                    , new String[]{PERSON_ID, PERSON_NAME, PERSON_EMAIL, PERSON_SEX, PERSON_NOTE}
                     , null, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
-                    Private data = new Private();
-                    data.idPrivate = mCursor.getInt(0);
+                    Person data = new Person();
+                    data.idPerson = mCursor.getInt(0);
                     data.name = mCursor.getString(1);
                     data.email = mCursor.getString(2);
                     data.sex = mCursor.getInt(3);
                     data.note = mCursor.getString(4);
+                    data.listPhone = getAllPhoneOfPerson(data.idPerson);
                     list.add(data);
                 } while (mCursor.moveToNext());
             }
@@ -383,12 +388,12 @@ public class Database {
         Phone data = new Phone();
         try {
             mCursor = mDB.query(true, DATABASE_TABLE_PHONE
-                    , new String[]{PHONE_NUMBER, PRIVATE_ID, COMPANY_ID, IS_COMPANY, PHONE_NOTE}
-                    , PRIVATE_ID + " = " + id + " OR " + COMPANY_ID + " = " + id, null, null, null, null, null);
+                    , new String[]{PHONE_NUMBER, PERSON_ID, COMPANY_ID, IS_COMPANY, PHONE_NOTE}
+                    , PERSON_ID + " = " + id + " OR " + COMPANY_ID + " = " + id, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
                     data.number = mCursor.getString(0);
-                    data.idPrivate = mCursor.getInt(1);
+                    data.idPerson = mCursor.getInt(1);
                     data.isCompany = mCursor.getInt(2);
                     data.isCompany = mCursor.getInt(3);
                     data.note = mCursor.getInt(4);
@@ -405,13 +410,13 @@ public class Database {
         List<Phone> list = new ArrayList<>();
         try {
             mCursor = mDB.query(true, DATABASE_TABLE_PHONE
-                    , new String[]{PHONE_NUMBER, PRIVATE_ID, COMPANY_ID, IS_COMPANY, PHONE_NOTE}
-                    , PRIVATE_ID + " = " + id + " OR " + COMPANY_ID + " = " + id, null, null, null, null, null);
+                    , new String[]{PHONE_NUMBER, PERSON_ID, COMPANY_ID, IS_COMPANY, PHONE_NOTE}
+                    , PERSON_ID + " = " + id + " OR " + COMPANY_ID + " = " + id, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
                     Phone data = new Phone();
                     data.number = mCursor.getString(0);
-                    data.idPrivate = mCursor.getInt(1);
+                    data.idPerson = mCursor.getInt(1);
                     data.isCompany = mCursor.getInt(2);
                     data.isCompany = mCursor.getInt(3);
                     data.note = mCursor.getInt(4);
@@ -429,13 +434,13 @@ public class Database {
         Address data = new Address();
         try {
             mCursor = mDB.query(true, DATABASE_TABLE_ADDRESS
-                    , new String[]{ADDRESS_ID, ADDRESS, PRIVATE_ID, COMPANY_ID, IS_COMPANY, IS_BILL_ADDRESS, ADDRESS_NOTE}
+                    , new String[]{ADDRESS_ID, ADDRESS, PERSON_ID, COMPANY_ID, IS_COMPANY, IS_BILL_ADDRESS, ADDRESS_NOTE}
                     , ADDRESS_ID + " = " + id, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
                     data.idAddress = mCursor.getInt(0);
                     data.address = mCursor.getString(1);
-                    data.idPrivate = mCursor.getInt(2);
+                    data.idPerson = mCursor.getInt(2);
                     data.isCompany = mCursor.getInt(3);
                     data.isCompany = mCursor.getInt(4);
                     data.isBillAddress = mCursor.getInt(5);
@@ -453,14 +458,14 @@ public class Database {
         List<Address> list = new ArrayList<>();
         try {
             mCursor = mDB.query(true, DATABASE_TABLE_ADDRESS
-                    , new String[]{ADDRESS_ID, ADDRESS, PRIVATE_ID, COMPANY_ID, IS_COMPANY, IS_BILL_ADDRESS, ADDRESS_NOTE}
+                    , new String[]{ADDRESS_ID, ADDRESS, PERSON_ID, COMPANY_ID, IS_COMPANY, IS_BILL_ADDRESS, ADDRESS_NOTE}
                     , null, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
                     Address data = new Address();
                     data.idAddress = mCursor.getInt(0);
                     data.address = mCursor.getString(1);
-                    data.idPrivate = mCursor.getInt(2);
+                    data.idPerson = mCursor.getInt(2);
                     data.isCompany = mCursor.getInt(3);
                     data.isCompany = mCursor.getInt(4);
                     data.isBillAddress = mCursor.getInt(5);
@@ -611,12 +616,12 @@ public class Database {
         Sale data = new Sale();
         try {
             mCursor = mDB.query(true, DATABASE_TABLE_SALE
-                    , new String[]{ITEM_ID, PRIVATE_ID, COMPANY_ID, SALE_PRICE, SALE_NOTE}
-                    , PRIVATE_ID + " = " + id + " OR " + COMPANY_ID + " = " + id, null, null, null, null, null);
+                    , new String[]{ITEM_ID, PERSON_ID, COMPANY_ID, SALE_PRICE, SALE_NOTE}
+                    , PERSON_ID + " = " + id + " OR " + COMPANY_ID + " = " + id, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
                     data.idItem = mCursor.getInt(0);
-                    data.idPrivate = mCursor.getInt(1);
+                    data.idPerson = mCursor.getInt(1);
                     data.idCompany = mCursor.getInt(2);
                     data.price = mCursor.getInt(3);
                     data.note = mCursor.getString(4);
@@ -633,13 +638,13 @@ public class Database {
         List<Sale> list = new ArrayList<>();
         try {
             mCursor = mDB.query(true, DATABASE_TABLE_SALE
-                    , new String[]{ITEM_ID, PRIVATE_ID, COMPANY_ID, SALE_PRICE, SALE_NOTE}
+                    , new String[]{ITEM_ID, PERSON_ID, COMPANY_ID, SALE_PRICE, SALE_NOTE}
                     , null, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
                     Sale data = new Sale();
                     data.idItem = mCursor.getInt(0);
-                    data.idPrivate = mCursor.getInt(1);
+                    data.idPerson = mCursor.getInt(1);
                     data.idCompany = mCursor.getInt(2);
                     data.price = mCursor.getInt(3);
                     data.note = mCursor.getString(4);
@@ -657,12 +662,12 @@ public class Database {
         Bill data = new Bill();
         try {
             mCursor = mDB.query(true, DATABASE_TABLE_BILL
-                    , new String[]{BILL_NUMBER, PRIVATE_ID, COMPANY_ID, BILL_DATE, BILL_TOTAL, IS_PAYED, IS_PAY_TYPE, BILL_NOTE}
+                    , new String[]{BILL_NUMBER, PERSON_ID, COMPANY_ID, BILL_DATE, BILL_TOTAL, IS_PAYED, IS_PAY_TYPE, BILL_NOTE}
                     , BILL_NUMBER + " = " + id, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
                     data.number = mCursor.getInt(0);
-                    data.idPrivate = mCursor.getInt(1);
+                    data.idPerson = mCursor.getInt(1);
                     data.idCompany = mCursor.getInt(2);
                     data.date = mCursor.getInt(3);
                     data.total = mCursor.getInt(4);
@@ -682,13 +687,13 @@ public class Database {
         List<Bill> list = new ArrayList<>();
         try {
             mCursor = mDB.query(true, DATABASE_TABLE_BILL
-                    , new String[]{BILL_NUMBER, PRIVATE_ID, COMPANY_ID, BILL_DATE, BILL_TOTAL, IS_PAYED, IS_PAY_TYPE, BILL_NOTE}
+                    , new String[]{BILL_NUMBER, PERSON_ID, COMPANY_ID, BILL_DATE, BILL_TOTAL, IS_PAYED, IS_PAY_TYPE, BILL_NOTE}
                     , null, null, null, null, null, null);
             if (mCursor != null && mCursor.moveToFirst()) {
                 do {
                     Bill data = new Bill();
                     data.number = mCursor.getInt(0);
-                    data.idPrivate = mCursor.getInt(1);
+                    data.idPerson = mCursor.getInt(1);
                     data.idCompany = mCursor.getInt(2);
                     data.date = mCursor.getInt(3);
                     data.total = mCursor.getInt(4);

@@ -30,4 +30,11 @@
     <string name="ask_read_contact">Let our access your contacts to perform this action ?</string>
     <string name="import_from_contact">Import from Contacts</string>
     <string name="loading">Loading ... </string>
+    <string name="contacting_google">Contacting Google ...</string>
+    <string name="get_contact">Authenticated. Getting Google Contacts ... </string>
+    <string name="get_contact_phone">Getting Phone Contacts ... </string>
+    <string name="get_contact_fail">Failed to get Contacts</string>
+    <string name="no_contact_found">No Contact Found</string>
+    <string name="import_from_contacts">Inport from contacts</string>
+    <string name="import_contact_success">Import contacts success !</string>
 </resources>
