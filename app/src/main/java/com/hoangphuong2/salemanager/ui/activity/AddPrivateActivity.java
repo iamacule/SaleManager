@@ -20,29 +20,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-
-import com.google.gdata.client.Query;
-import com.google.gdata.client.contacts.ContactsService;
-import com.google.gdata.data.contacts.ContactEntry;
-import com.google.gdata.data.contacts.ContactFeed;
-import com.google.gdata.data.extensions.Email;
-import com.google.gdata.data.extensions.Name;
-import com.google.gdata.data.extensions.PhoneNumber;
 import com.hoangphuong2.salemanager.R;
-import com.hoangphuong2.salemanager.api.GetAccessToken;
-import com.hoangphuong2.salemanager.api.GoogleConstants;
 import com.hoangphuong2.salemanager.data.sqlite.Database;
 import com.hoangphuong2.salemanager.dialog.DialogAsk;
 import com.hoangphuong2.salemanager.dialog.DialogInfo;
-import com.hoangphuong2.salemanager.dialog.DialogRequestGoogleContacts;
-import com.hoangphuong2.salemanager.dialog.PDialog;
 import com.hoangphuong2.salemanager.model.Phone;
 import com.hoangphuong2.salemanager.model.Person;
 import com.hoangphuong2.salemanager.ui.control.OnSingleClickListener;
@@ -51,12 +37,7 @@ import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
 import com.hoangphuong2.salemanager.util.DataUtil;
 import com.hoangphuong2.salemanager.util.PermissionUtil;
 import com.hoangphuong2.salemanager.util.ResizeBitmap;
-import com.hoangphuong2.salemanager.util.Tag;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -207,174 +188,6 @@ public class AddPrivateActivity extends AppCompatActivity {
                 return;
             }
         }
-    }
-
-    private void launchAuthDialog() {
-        DialogRequestGoogleContacts.createDialog(this);
-        DialogRequestGoogleContacts.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                finish();
-            }
-        });
-
-        DialogRequestGoogleContacts.webView.loadUrl(GoogleConstants.OAUTH_URL + "?redirect_uri=" + GoogleConstants.REDIRECT_URI
-                + "&response_type=code&client_id=" + GoogleConstants.CLIENT_ID + "&scope=" + GoogleConstants.OAUTH_SCOPE);
-        DialogRequestGoogleContacts.webView.setWebViewClient(new WebViewClient() {
-            boolean authComplete = false;
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-            }
-
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                if (url.contains("?code=") && authComplete != true) {
-                    Uri uri = Uri.parse(url);
-                    String authCode = uri.getQueryParameter("code");
-                    authComplete = true;
-                    DialogRequestGoogleContacts.dialog.dismiss();
-                    new GoogleAuthToken().execute(authCode);
-                } else if (url.contains("error=access_denied")) {
-                    Log.i("", "ACCESS_DENIED_HERE");
-                    authComplete = true;
-                    DialogRequestGoogleContacts.dialog.dismiss();
-                }
-            }
-        });
-        DialogRequestGoogleContacts.dialog.show();
-    }
-
-    private class GoogleAuthToken extends AsyncTask<String, String, JSONObject> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            PDialog.show(AddPrivateActivity.this, AddPrivateActivity.this.getString(R.string.contacting_google));
-        }
-
-        @Override
-        protected JSONObject doInBackground(String... args) {
-            String authCode = args[0];
-            GetAccessToken jParser = new GetAccessToken();
-            JSONObject json = jParser.getToken(GoogleConstants.TOKEN_URL,
-                    authCode, GoogleConstants.CLIENT_ID,
-                    GoogleConstants.CLIENT_SECRET,
-                    GoogleConstants.REDIRECT_URI, GoogleConstants.GRANT_TYPE);
-            return json;
-        }
-
-        @Override
-        protected void onPostExecute(JSONObject json) {
-            PDialog.dismiss();
-            if (json != null) {
-                try {
-                    new GetGoogleContacts(AddPrivateActivity.this).execute(json.getString("access_token"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    private class GetGoogleContacts extends
-            AsyncTask<String, String, List<ContactEntry>> {
-
-        private ProgressDialog pDialog;
-        private Context context;
-
-        public GetGoogleContacts(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            PDialog.show(AddPrivateActivity.this, AddPrivateActivity.this.getString(R.string.get_contact));
-        }
-
-        @Override
-        protected List<ContactEntry> doInBackground(String... args) {
-            String accessToken = args[0];
-            ContactsService contactsService = new ContactsService(
-                    GoogleConstants.APP);
-            contactsService.setHeader("Authorization", "Bearer " + accessToken);
-            contactsService.setHeader("GData-Version", "3.0");
-            List<ContactEntry> contactEntries = null;
-            try {
-                URL feedUrl = new URL(GoogleConstants.CONTACTS_URL);
-                Query myQuery = new Query(feedUrl);
-                myQuery.setMaxResults(GoogleConstants.MAX_NB_CONTACTS);
-                ContactFeed resultFeed = contactsService.getFeed(myQuery,
-                        ContactFeed.class);
-                contactEntries = resultFeed.getEntries();
-            } catch (Exception e) {
-                pDialog.dismiss();
-                Boast.makeText(AddPrivateActivity.this, AddPrivateActivity.this.getString(R.string.get_contact_fail));
-            }
-            return contactEntries;
-        }
-
-        @Override
-        protected void onPostExecute(List<ContactEntry> googleContacts) {
-            if (null != googleContacts && googleContacts.size() > 0) {
-                StringBuffer output = new StringBuffer();
-
-                for (ContactEntry contactEntry : googleContacts) {
-                    String name = "";
-                    String email = "";
-                    List<PhoneNumber> phoneNumber = new ArrayList<>();
-
-                    if (contactEntry.hasName()) {
-                        Name tmpName = contactEntry.getName();
-                        if (tmpName.hasFullName()) {
-                            name = tmpName.getFullName().getValue();
-                        } else {
-                            if (tmpName.hasGivenName()) {
-                                name = tmpName.getGivenName().getValue();
-                                if (tmpName.getGivenName().hasYomi()) {
-                                    name += " ("
-                                            + tmpName.getGivenName().getYomi()
-                                            + ")";
-                                }
-                                if (tmpName.hasFamilyName()) {
-                                    name += tmpName.getFamilyName().getValue();
-                                    if (tmpName.getFamilyName().hasYomi()) {
-                                        name += " ("
-                                                + tmpName.getFamilyName()
-                                                .getYomi() + ")";
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    if (contactEntry.hasPhoneNumbers()) {
-                        phoneNumber = contactEntry.getPhoneNumbers();
-                    }
-                    List<Email> emails = contactEntry.getEmailAddresses();
-                    if (null != emails && emails.size() > 0) {
-                        Email tempEmail = (Email) emails.get(0);
-                        email = tempEmail.getAddress();
-                    }
-                    output.append(name + "\n");
-                    output.append(email + "\n");
-                    for (PhoneNumber data : phoneNumber) {
-                        output.append(data.getPhoneNumber() + ",");
-                    }
-                    output.append("\n");
-                }
-                Log.e(Tag.AddPrivateActivity, output.toString());
-
-            } else {
-                Log.e(Tag.AddPrivateActivity, "No Contact Found.");
-                Boast.makeText(AddPrivateActivity.this, AddPrivateActivity.this.getString(R.string.no_contact_found));
-            }
-            PDialog.dismiss();
-        }
-
     }
 
     private void saveData() {
