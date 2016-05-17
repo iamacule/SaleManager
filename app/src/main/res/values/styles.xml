@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ProgressDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/colorRed</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowFrame">@null</item>
+    </style>
+
 </resources>

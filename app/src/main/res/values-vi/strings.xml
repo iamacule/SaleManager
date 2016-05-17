@@ -29,4 +29,5 @@
     <string name="cancel">Từ chối</string>
     <string name="ask_read_contact">Cho phép ứng dụng truy cập đến danh bạ của bạn để thực hiện tác vụ này ?</string>
     <string name="import_from_contact">Nhập từ Danh bạ</string>
+    <string name="loading">Xin chờ ... </string>
 </resources>
