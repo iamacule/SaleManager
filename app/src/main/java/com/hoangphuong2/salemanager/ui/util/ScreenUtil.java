@@ -1,4 +1,4 @@
-package com.hoangphuong2.salemanager.util;
+package com.hoangphuong2.salemanager.ui.util;
 
 import android.util.DisplayMetrics;
 import android.view.*;

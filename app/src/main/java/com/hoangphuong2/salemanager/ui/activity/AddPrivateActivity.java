@@ -1,23 +1,18 @@
 package com.hoangphuong2.salemanager.ui.activity;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +31,7 @@ import com.hoangphuong2.salemanager.ui.toast.Boast;
 import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
 import com.hoangphuong2.salemanager.util.DataUtil;
 import com.hoangphuong2.salemanager.util.PermissionUtil;
-import com.hoangphuong2.salemanager.util.ResizeBitmap;
+import com.hoangphuong2.salemanager.ui.util.ResizeBitmap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -289,8 +284,7 @@ public class AddPrivateActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
 
             Database.getInstance().open();
-            List<Person> listPersonCurrent = new ArrayList<>();
-            List<Phone> listPhoneCurrent = new ArrayList<>();
+            List<Person> listPersonCurrent;
             listPersonCurrent = Database.getInstance().getAllPerson();
             ContentResolver cr = getContentResolver();
             Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,

@@ -15,8 +15,8 @@ import com.hoangphuong2.salemanager.R;
 import com.hoangphuong2.salemanager.data.preferences.Preferences;
 import com.hoangphuong2.salemanager.ui.control.OnSingleClickListener;
 import com.hoangphuong2.salemanager.ui.toast.Boast;
-import com.hoangphuong2.salemanager.util.ResizeBitmap;
-import com.hoangphuong2.salemanager.util.ScreenUtil;
+import com.hoangphuong2.salemanager.ui.util.ResizeBitmap;
+import com.hoangphuong2.salemanager.ui.util.ScreenUtil;
 
 /**
  * Created by MrAn on 13-May-16.
