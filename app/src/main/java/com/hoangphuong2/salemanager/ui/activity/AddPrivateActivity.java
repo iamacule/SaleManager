@@ -15,11 +15,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.Spinner;
+
 import com.hoangphuong2.salemanager.R;
 import com.hoangphuong2.salemanager.data.sqlite.Database;
 import com.hoangphuong2.salemanager.dialog.DialogAsk;
@@ -58,6 +61,11 @@ public class AddPrivateActivity extends AppCompatActivity {
     private EditText etPhone3;
     private EditText etPhone4;
     private EditText etPhone5;
+    private Spinner spNote;
+    private Spinner spNote2;
+    private Spinner spNote3;
+    private Spinner spNote4;
+    private Spinner spNote5;
     private ImageView imgLogo;
     private Bitmap bpAdd;
     private Button btnSave;
@@ -65,6 +73,8 @@ public class AddPrivateActivity extends AppCompatActivity {
     private RadioButton radioMale;
     private RadioButton radioFemale;
     private ImportContacts importContacts;
+    private ArrayAdapter<String> dataSpinner;
+    private List<Phone> listPhone;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,6 +95,42 @@ public class AddPrivateActivity extends AppCompatActivity {
         btnImport = (Button) findViewById(R.id.btnImport);
         radioMale = (RadioButton) findViewById(R.id.radioMale);
         radioFemale = (RadioButton) findViewById(R.id.radioFemale);
+        listPhone = new ArrayList<>();
+        // Creating adapter for spinner
+        dataSpinner = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, DataUtil.listPhoneNote);
+
+        // Drop down layout style - list view with radio button
+        dataSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spNote = (Spinner) findViewById(R.id.spNote);
+        spNote.setAdapter(dataSpinner);
+        spNote.setSelection(1);
+
+        lnMorePhone2 = (LinearLayout) findViewById(R.id.lnMorePhone2);
+        etPhone2 = (EditText) findViewById(R.id.etPhone2);
+        spNote2 = (Spinner) findViewById(R.id.spNote2);
+        spNote2.setAdapter(dataSpinner);
+        spNote2.setSelection(1);
+
+        lnMorePhone3 = (LinearLayout) findViewById(R.id.lnMorePhone3);
+        etPhone3 = (EditText) findViewById(R.id.etPhone3);
+        spNote3 = (Spinner) findViewById(R.id.spNote3);
+        spNote3.setAdapter(dataSpinner);
+        spNote3.setSelection(1);
+
+        lnMorePhone4 = (LinearLayout) findViewById(R.id.lnMorePhone4);
+        etPhone4 = (EditText) findViewById(R.id.etPhone4);
+        spNote4 = (Spinner) findViewById(R.id.spNote4);
+        spNote4.setAdapter(dataSpinner);
+        spNote4.setSelection(1);
+
+        lnMorePhone5 = (LinearLayout) findViewById(R.id.lnMorePhone5);
+        etPhone5 = (EditText) findViewById(R.id.etPhone5);
+        spNote5 = (Spinner) findViewById(R.id.spNote5);
+        spNote5.setAdapter(dataSpinner);
+        spNote5.setSelection(1);
+
 
         prepareValue();
         setOnClick();
@@ -195,12 +241,25 @@ public class AddPrivateActivity extends AppCompatActivity {
             canSave = false;
         if (etPhone.getText() == null || etPhone.getText().equals(""))
             canSave = false;
+        if ((!etPhone2.getText().equals("")
+                && !etPhone2.getText().toString().matches(String.valueOf(Patterns.PHONE))))
+            canSave = false;
+        if ((!etPhone3.getText().equals("")
+                && !etPhone3.getText().toString().matches(String.valueOf(Patterns.PHONE))))
+            canSave = false;
+        if ((!etPhone4.getText().equals("")
+                && !etPhone4.getText().toString().matches(String.valueOf(Patterns.PHONE))))
+            canSave = false;
+        if ((!etPhone5.getText().equals("")
+                && !etPhone5.getText().toString().matches(String.valueOf(Patterns.PHONE))))
+            canSave = false;
         if (!etPhone.getText().toString().matches(String.valueOf(Patterns.PHONE)))
             canSave = false;
         if (!etMail.getText().toString().matches(String.valueOf(Patterns.EMAIL_ADDRESS)))
             canSave = false;
 
         if (canSave) {
+            listPhone.clear();
             Database.getInstance().open();
             //Create and insert Person
             DataUtil.personData = new Person();
@@ -215,13 +274,37 @@ public class AddPrivateActivity extends AppCompatActivity {
 
             //Create and insert Phone
             DataUtil.phoneData = new Phone();
-            DataUtil.phoneData.isCompany = 0;
             DataUtil.phoneData.idPerson = DataUtil.personData.idPerson;
-            DataUtil.phoneData.number = etPhone.getText().toString().trim();
+            DataUtil.phoneData.isCompany = 0;
             DataUtil.phoneData.idCompany = 0;
-            DataUtil.phoneData.note = DataUtil.PHONE_MOBILE_INT;
-            contentValues = Database.getInstance().createPhone(DataUtil.phoneData);
-            Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PHONE);
+            DataUtil.phoneData.note = spNote.getSelectedItemPosition();
+            DataUtil.phoneData.number = etPhone.getText().toString();
+            listPhone.add(DataUtil.phoneData);
+
+            if (!etPhone2.getText().equals("")) {
+                DataUtil.phoneData.note = spNote2.getSelectedItemPosition();
+                DataUtil.phoneData.number = etPhone2.getText().toString();
+                listPhone.add(DataUtil.phoneData);
+            }
+            if (!etPhone3.getText().equals("")) {
+                DataUtil.phoneData.note = spNote3.getSelectedItemPosition();
+                DataUtil.phoneData.number = etPhone3.getText().toString();
+                listPhone.add(DataUtil.phoneData);
+            }
+            if (!etPhone4.getText().equals("")) {
+                DataUtil.phoneData.note = spNote4.getSelectedItemPosition();
+                DataUtil.phoneData.number = etPhone4.getText().toString();
+                listPhone.add(DataUtil.phoneData);
+            }
+            if (!etPhone5.getText().equals("")) {
+                DataUtil.phoneData.note = spNote5.getSelectedItemPosition();
+                DataUtil.phoneData.number = etPhone5.getText().toString();
+                listPhone.add(DataUtil.phoneData);
+            }
+            for (Phone phone : listPhone) {
+                contentValues = Database.getInstance().createPhone(phone);
+                Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PHONE);
+            }
             Database.getInstance().close();
             DataUtil.needAddNew = true;
             onBackPressed();
@@ -233,29 +316,21 @@ public class AddPrivateActivity extends AppCompatActivity {
     private void addPhoneButton() {
         switch (addCount) {
             case 0:
-                lnMorePhone2 = (LinearLayout) findViewById(R.id.lnMorePhone2);
-                etPhone2 = (EditText) findViewById(R.id.etPhone2);
                 lnMorePhone2.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
                 lnMorePhone2.setVisibility(View.VISIBLE);
                 addCount++;
                 break;
             case 1:
-                lnMorePhone3 = (LinearLayout) findViewById(R.id.lnMorePhone3);
-                etPhone3 = (EditText) findViewById(R.id.etPhone3);
                 lnMorePhone3.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
                 lnMorePhone3.setVisibility(View.VISIBLE);
                 addCount++;
                 break;
             case 2:
-                lnMorePhone4 = (LinearLayout) findViewById(R.id.lnMorePhone4);
-                etPhone4 = (EditText) findViewById(R.id.etPhone4);
                 lnMorePhone4.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
                 lnMorePhone4.setVisibility(View.VISIBLE);
                 addCount++;
                 break;
             case 3:
-                lnMorePhone5 = (LinearLayout) findViewById(R.id.lnMorePhone5);
-                etPhone5 = (EditText) findViewById(R.id.etPhone5);
                 lnMorePhone5.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
                 lnMorePhone5.setVisibility(View.VISIBLE);
                 addCount++;

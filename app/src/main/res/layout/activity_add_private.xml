@@ -113,13 +113,29 @@
                         android:text="@string/phone"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/option_margin"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spNote"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4">
+
+                    </Spinner>
 
                     <EditText
                         android:id="@+id/etPhone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/option_margin"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.5"
                         android:inputType="number"
                         android:singleLine="true" />
 
@@ -139,21 +155,20 @@
                     android:orientation="horizontal"
                     android:visibility="gone">
 
-                    <TextView
+                    <Spinner
+                        android:id="@+id/spNote2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/option_margin"
-                        android:layout_weight="0.3"
-                        android:maxLines="1"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18dp" />
+                        android:layout_weight="0.4">
+
+                    </Spinner>
 
                     <EditText
                         android:id="@+id/etPhone2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/option_margin"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.5"
                         android:inputType="number"
                         android:singleLine="true" />
 
@@ -172,21 +187,20 @@
                     android:orientation="horizontal"
                     android:visibility="gone">
 
-                    <TextView
+                    <Spinner
+                        android:id="@+id/spNote3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/option_margin"
-                        android:layout_weight="0.3"
-                        android:maxLines="1"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18dp" />
+                        android:layout_weight="0.4">
+
+                    </Spinner>
 
                     <EditText
                         android:id="@+id/etPhone3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/option_margin"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.5"
                         android:inputType="number"
                         android:singleLine="true" />
 
@@ -205,21 +219,20 @@
                     android:orientation="horizontal"
                     android:visibility="gone">
 
-                    <TextView
+                    <Spinner
+                        android:id="@+id/spNote4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/option_margin"
-                        android:layout_weight="0.3"
-                        android:maxLines="1"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18dp" />
+                        android:layout_weight="0.4">
+
+                    </Spinner>
 
                     <EditText
                         android:id="@+id/etPhone4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/option_margin"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.5"
                         android:inputType="number"
                         android:singleLine="true" />
 
@@ -238,21 +251,20 @@
                     android:orientation="horizontal"
                     android:visibility="gone">
 
-                    <TextView
+                    <Spinner
+                        android:id="@+id/spNote5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/option_margin"
-                        android:layout_weight="0.3"
-                        android:maxLines="1"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18dp" />
+                        android:layout_weight="0.4">
+
+                    </Spinner>
 
                     <EditText
                         android:id="@+id/etPhone5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/option_margin"
-                        android:layout_weight="0.6"
+                        android:layout_weight="0.5"
                         android:inputType="number"
                         android:singleLine="true" />
 
