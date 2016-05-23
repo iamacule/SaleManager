@@ -37,4 +37,5 @@
     <string name="no_contact_found">No Contact Found</string>
     <string name="import_from_contacts">Import from contacts</string>
     <string name="import_contact_success">Import contacts success !</string>
+    <string name="chooser">Please choose phone number !</string>
 </resources>

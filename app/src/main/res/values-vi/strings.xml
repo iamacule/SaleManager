@@ -37,4 +37,5 @@
     <string name="no_contact_found">Không tìm thấy danh bạ</string>
     <string name="import_from_contacts">Nhập từ danh bạ điện thoại</string>
     <string name="import_contact_success">Nhập Danh Bạ thành công !</string>
+    <string name="chooser">Vui lòng chọn số điện thoại !</string>
 </resources>

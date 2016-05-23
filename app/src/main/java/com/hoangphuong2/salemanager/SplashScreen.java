@@ -44,7 +44,7 @@ public class SplashScreen extends AppCompatActivity {
                 DataUtil.PHONE_MOBILE = getString(R.string.mobile);
                 DataUtil.PHONE_WORK = getString(R.string.work);
                 DataUtil.PHONE_MORE = getString(R.string.order);
-                PermissionUtil.permissionReadContacts = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED ? true : false;
+                PermissionUtil.permissionReadContacts = ContextCompat.checkSelfPermission(SplashScreen.this, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED ? true : false;
                 Database.setUp(getApplicationContext());
             }
         });

@@ -5,10 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 
 import com.hoangphuong2.salemanager.R;
+import com.hoangphuong2.salemanager.dialog.DialogChooser;
 import com.hoangphuong2.salemanager.helper.PhoneHelper;
 import com.hoangphuong2.salemanager.model.Person;
+import com.hoangphuong2.salemanager.model.Phone;
 import com.hoangphuong2.salemanager.ui.control.OnSingleClickListener;
 import com.hoangphuong2.salemanager.ui.toast.Boast;
 import com.hoangphuong2.salemanager.util.DataUtil;
@@ -72,14 +75,48 @@ public class DataAdapter extends RecyclerView.Adapter<DataHolder> {
         holder.imgCall.setOnClickListener(click);
     }
 
-    private void action(Person aPerson, boolean isCall) {
+    private void action(Person aPerson, final boolean isCall) {
 
         if (aPerson.listPhone.size() > 0) {
-            phoneNumber = aPerson.listPhone.get(0).number;
-            if (!isCall) {
-                phoneHelper.message(phoneNumber, "");
-            } else {
-                phoneHelper.dial(phoneNumber);
+            if(aPerson.listPhone.size()==1){
+                phoneNumber = aPerson.listPhone.get(0).number;
+                if (!isCall) {
+                    phoneHelper.message(phoneNumber, "");
+                } else {
+                    phoneHelper.dial(phoneNumber);
+                }
+            }else {
+                DialogChooser.createDialog(activity,activity.getString(R.string.chooser));
+                for (Phone phone : aPerson.listPhone){
+                    final RadioButton radioButton  = new RadioButton(activity);
+                    radioButton.setText(phone.number);
+                    DialogChooser.radioGroup.addView(radioButton);
+                    radioButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            phoneNumber = radioButton.getText().toString();
+                        }
+                    });
+                }
+                DialogChooser.show();
+                DialogChooser.btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DialogChooser.dialog.dismiss();
+                    }
+                });
+                DialogChooser.btnConfirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DialogChooser.dialog.dismiss();
+                        if (!isCall) {
+                            phoneHelper.message(phoneNumber, "");
+                        } else {
+                            phoneHelper.dial(phoneNumber);
+                        }
+                    }
+                });
+                DialogChooser.dialog.show();
             }
         } else {
             Boast.makeText(activity, activity.getString(R.string.private_no_phone)).show();
