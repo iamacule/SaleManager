@@ -37,367 +37,80 @@
                 android:gravity="top|center"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/option_margin"
-                    android:gravity="center|left"
-                    android:orientation="horizontal">
+                <include
+                    android:id="inputName"
+                    layout="@layout/input_text" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/option_margin"
-                        android:layout_weight="0.3"
-                        android:maxLines="1"
-                        android:text="@string/name"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18dp" />
-
-                    <EditText
-                        android:id="@+id/etName"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/option_margin"
-                        android:layout_weight="0.7"
-                        android:singleLine="true" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.7"
-                    android:gravity="top|center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/option_margin"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/option_margin"
-                            android:layout_weight="0.3"
-                            android:maxLines="1"
-                            android:text="@string/address"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18dp" />
-
-                        <EditText
-                            android:id="@+id/etAddress"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/option_margin"
-                            android:layout_weight="0.7"
-                            android:singleLine="true" />
-                    </LinearLayout>
-                </LinearLayout>
+                <include
+                    android:id="inputAddress"
+                    layout="@layout/input_text" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/option_margin"
                     android:gravity="center|left"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <include
+                        android:id="inputPhone"
+                        layout="@layout/input_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/option_margin"
-                        android:layout_weight="0.3"
-                        android:maxLines="1"
-                        android:text="@string/phone"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/option_margin"
-                    android:gravity="center|left"
-                    android:orientation="horizontal">
-
-                    <Spinner
-                        android:id="@+id/spNote"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4">
-
-                    </Spinner>
-
-                    <EditText
-                        android:id="@+id/etPhone"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/option_margin"
-                        android:layout_weight="0.5"
-                        android:inputType="number"
-                        android:singleLine="true" />
+                        android:layout_weight="0.7" />
 
                     <ImageView
                         android:id="@+id/imgAdd"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.1" />
+                        android:layout_weight="0.3" />
                 </LinearLayout>
 
+                <include
+                    android:id="inputEmail"
+                    layout="@layout/input_text" />
+
                 <LinearLayout
-                    android:id="@+id/lnMorePhone2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/option_margin"
-                    android:gravity="center|left"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/option_margin"
+                    android:orientation="horizontal">
 
-                    <Spinner
-                        android:id="@+id/spNote2"
-                        android:layout_width="0dp"
+                    <RadioGroup
+                        android:id="@+id/radioGroupSex"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.4">
-
-                    </Spinner>
-
-                    <EditText
-                        android:id="@+id/etPhone2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/option_margin"
-                        android:layout_weight="0.5"
-                        android:inputType="number"
-                        android:singleLine="true" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lnMorePhone3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/option_margin"
-                    android:gravity="center|left"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <Spinner
-                        android:id="@+id/spNote3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4">
-
-                    </Spinner>
-
-                    <EditText
-                        android:id="@+id/etPhone3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/option_margin"
-                        android:layout_weight="0.5"
-                        android:inputType="number"
-                        android:singleLine="true" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lnMorePhone4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/option_margin"
-                    android:gravity="center|left"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <Spinner
-                        android:id="@+id/spNote4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4">
-
-                    </Spinner>
-
-                    <EditText
-                        android:id="@+id/etPhone4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/option_margin"
-                        android:layout_weight="0.5"
-                        android:inputType="number"
-                        android:singleLine="true" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/lnMorePhone5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/option_margin"
-                    android:gravity="center|left"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <Spinner
-                        android:id="@+id/spNote5"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.4">
-
-                    </Spinner>
-
-                    <EditText
-                        android:id="@+id/etPhone5"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/option_margin"
-                        android:layout_weight="0.5"
-                        android:inputType="number"
-                        android:singleLine="true" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.1" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.7"
-                    android:gravity="top|center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/option_margin"
-                        android:gravity="center|left"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="0dp"
+                        <RadioButton
+                            android:id="@+id/radioMale"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/option_margin"
-                            android:layout_weight="0.3"
-                            android:maxLines="1"
-                            android:text="@string/email"
-                            android:textColor="@color/colorPrimary"
+                            android:layout_marginRight="@dimen/option_margin_next"
+                            android:checked="true"
+                            android:text="@string/male"
                             android:textSize="18dp" />
 
-                        <EditText
-                            android:id="@+id/etMail"
-                            android:layout_width="0dp"
+                        <RadioButton
+                            android:id="@+id/radioFemale"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/option_margin"
-                            android:layout_weight="0.7"
-                            android:inputType="textEmailAddress"
-                            android:singleLine="true" />
-                    </LinearLayout>
+                            android:checked="false"
+                            android:text="@string/female"
+                            android:textSize="18dp" />
+                    </RadioGroup>
                 </LinearLayout>
+
+                <include
+                    android:id="inputNote"
+                    layout="@layout/input_text" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.7"
                     android:gravity="top|center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/option_margin"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/option_margin"
-                            android:layout_weight="0.3"
-                            android:maxLines="1"
-                            android:text="@string/sex"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18dp" />
-
-                        <RadioGroup
-                            android:id="@+id/radioGroupSex"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.7"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/radioMale"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/option_margin_next"
-                                android:checked="true"
-                                android:text="@string/male"
-                                android:textSize="18dp" />
-
-                            <RadioButton
-                                android:id="@+id/radioFemale"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:text="@string/female"
-                                android:textSize="18dp" />
-                        </RadioGroup>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.7"
-                    android:gravity="top|center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/option_margin"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/option_margin"
-                            android:layout_weight="0.3"
-                            android:maxLines="1"
-                            android:text="@string/note"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="18dp" />
-
-                        <EditText
-                            android:id="@+id/etNote"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/option_margin"
-                            android:layout_weight="0.7" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.7"
-                    android:gravity="top|center"
+                    android:layout_marginTop="@dimen/data_text_size"
                     android:orientation="vertical">
 
                     <LinearLayout

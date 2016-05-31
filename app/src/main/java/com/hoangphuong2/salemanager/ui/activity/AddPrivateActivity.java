@@ -43,7 +43,7 @@ import java.util.List;
 /**
  * Created by MrAn on 16-May-16.
  */
-public class AddPrivateActivity extends AppCompatActivity {
+public class AddPrivateActivity extends BaseActivity {
     private final int MALE = 1;
     private final int FEMALE = 0;
     private int sex = MALE;
@@ -80,8 +80,11 @@ public class AddPrivateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_private);
-        initLayout();
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_add_private;
     }
 
     private void initLayout() {
@@ -131,10 +134,6 @@ public class AddPrivateActivity extends AppCompatActivity {
         spNote5 = (Spinner) findViewById(R.id.spNote5);
         spNote5.setAdapter(dataSpinner);
         spNote5.setSelection(1);
-
-
-        prepareValue();
-        setOnClick();
     }
 
     private void startImportContactsAsyncTask() {
@@ -339,6 +338,21 @@ public class AddPrivateActivity extends AppCompatActivity {
                 addCount++;
                 break;
         }
+    }
+
+    @Override
+    public void identifyLayout() {
+        initLayout();
+    }
+
+    @Override
+    public void identityValue() {
+        prepareValue();
+    }
+
+    @Override
+    public void identityAction() {
+        setOnClick();
     }
 
     private class ImportContacts extends AsyncTask<Void, Integer, Boolean> {

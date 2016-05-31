@@ -23,7 +23,7 @@ import com.hoangphuong2.salemanager.ui.util.ScreenUtil;
 /**
  * Created by MrAn on 13-May-16.
  */
-public class StartActivity extends AppCompatActivity {
+public class StartActivity extends BaseActivity {
     private ImageView imgLogo;
     private EditText etName;
     private LinearLayout inputName;
@@ -34,9 +34,11 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
-        initLayout();
-        setOnClick();
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_start;
     }
 
     private void setOnClick() {
@@ -70,27 +72,13 @@ public class StartActivity extends AppCompatActivity {
             hintName.setError(getString(R.string.max_lenge));
             etName.requestFocus();
 
-        }else {
+        } else {
             Preferences.getInstance(getApplicationContext()).storeValue(Preferences.SALE_MANAGER_OWNER_NAME, etName.getText().toString());
             Boast.makeText(this, getString(R.string.toast_save_success)).show();
-            Intent intent = new Intent(this,MainActivity.class);
-            overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+            Intent intent = new Intent(this, MainActivity.class);
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
             startActivity(intent);
         }
-    }
-
-    private void initLayout() {
-        imgLogo = (ImageView) findViewById(R.id.imgLogo);
-        inputName = (LinearLayout) findViewById(R.id.inputName);
-        etName = (EditText) inputName.findViewById(R.id.et);
-        hintName = (TextInputLayout)inputName.findViewById(R.id.hint);
-        etName.setHint(getString(R.string.splash_screen_et_hint));
-
-        btnConfirm = (Button) findViewById(R.id.btnComfirm);
-        screenWidth = ScreenUtil.getScreenWidth(getWindowManager());
-        Bitmap logo = ResizeBitmap.resize(BitmapFactory.decodeResource(getResources(),
-                R.drawable.sale_manager_icon), screenWidth / 4);
-        imgLogo.setImageBitmap(logo);
     }
 
     @Override
@@ -98,4 +86,26 @@ public class StartActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
+    @Override
+    public void identifyLayout() {
+        imgLogo = (ImageView) findViewById(R.id.imgLogo);
+        inputName = (LinearLayout) findViewById(R.id.inputName);
+        etName = (EditText) inputName.findViewById(R.id.et);
+        hintName = (TextInputLayout) inputName.findViewById(R.id.hint);
+        etName.setHint(getString(R.string.splash_screen_et_hint));
+        btnConfirm = (Button) findViewById(R.id.btnComfirm);
+    }
+
+    @Override
+    public void identityValue() {
+        screenWidth = ScreenUtil.getScreenWidth(getWindowManager());
+        Bitmap logo = ResizeBitmap.resize(BitmapFactory.decodeResource(getResources(),
+                R.drawable.sale_manager_icon), screenWidth / 4);
+        imgLogo.setImageBitmap(logo);
+    }
+
+    @Override
+    public void identityAction() {
+        setOnClick();
+    }
 }

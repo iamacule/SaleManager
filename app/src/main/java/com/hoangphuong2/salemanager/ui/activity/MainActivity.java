@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.hoangphuong2.salemanager.R;
@@ -20,7 +17,7 @@ import com.hoangphuong2.salemanager.util.DataUtil;
 /**
  * Created by MrAn on 12-May-16.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private PagerAdapter adapter;
@@ -32,22 +29,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initLayout();
-        initToolBar();
-        initTabLayout();
-        setOnClick();
     }
 
     private void setOnClick() {
         OnSingleClickListener onSingleClickListener = new OnSingleClickListener(500) {
             @Override
             public void onSingleClick(View v) {
-                switch (v.getId()){
+                switch (v.getId()) {
                     case R.id.fab:
-                        switch (DataUtil.current_fragment){
+                        switch (DataUtil.current_fragment) {
                             case DataUtil.PRIVATE:
-                                intent = new Intent(MainActivity.this,AddPrivateActivity.class);
+                                intent = new Intent(MainActivity.this, AddPrivateActivity.class);
                                 startActivity(intent);
                                 break;
                             case DataUtil.COMPANY:
@@ -70,14 +62,14 @@ public class MainActivity extends AppCompatActivity {
         addButton = (FloatingActionButton) findViewById(R.id.fab);
     }
 
-    public void setVisibleAddButton(boolean isShow){
-        if(isShow){
-            if(addButton.getVisibility()==View.GONE){
+    public void setVisibleAddButton(boolean isShow) {
+        if (isShow) {
+            if (addButton.getVisibility() == View.GONE) {
                 addButton.startAnimation(AnimationUtil.slideInBottom(this));
                 addButton.setVisibility(View.VISIBLE);
             }
-        }else {
-            if(addButton.getVisibility()==View.VISIBLE){
+        } else {
+            if (addButton.getVisibility() == View.VISIBLE) {
                 addButton.startAnimation(AnimationUtil.slideOutBottom(this));
                 addButton.setVisibility(View.GONE);
             }
@@ -97,13 +89,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                DataUtil.current_fragment=tab.getPosition();
-                setIcon(SELECTED,tab);
+                DataUtil.current_fragment = tab.getPosition();
+                setIcon(SELECTED, tab);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                setIcon(UNSELECTED,tab);
+                setIcon(UNSELECTED, tab);
             }
 
             @Override
@@ -113,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setIcon(int id,TabLayout.Tab tab){
-        if (id==SELECTED){
-            switch (tab.getPosition()){
+    private void setIcon(int id, TabLayout.Tab tab) {
+        if (id == SELECTED) {
+            switch (tab.getPosition()) {
                 case 0:
                     tab.setIcon(R.drawable.private_select);
                     break;
@@ -126,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
                     tab.setIcon(R.drawable.bill_select);
                     break;
             }
-        }else {
-            switch (tab.getPosition()){
+        } else {
+            switch (tab.getPosition()) {
                 case 0:
                     tab.setIcon(R.drawable.private_none_select);
                     break;
@@ -150,5 +142,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    @Override
+    public void identifyLayout() {
+        initLayout();
+        initToolBar();
+    }
+
+    @Override
+    public void identityValue() {
+        initTabLayout();
+    }
+
+    @Override
+    public void identityAction() {
+        setOnClick();
+    }
+
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_main;
     }
 }
