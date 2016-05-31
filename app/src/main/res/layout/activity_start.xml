@@ -27,24 +27,13 @@
         android:layout_height="0dp"
         android:layout_weight="0.6"
         android:gravity="top|center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/option_sort_top"
+        android:layout_marginRight="@dimen/option_sort_top">
 
-        <TextView
-            android:id="@+id/txtHint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:text="@string/splash_screen_et_hint"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18dp" />
-
-        <EditText
-            android:id="@+id/etName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:singleLine="true"/>
+        <include
+            android:id="@+id/inputName"
+            layout="@layout/input_text" />
 
         <Button
             android:id="@+id/btnComfirm"
@@ -53,8 +42,8 @@
             android:layout_marginLeft="45dp"
             android:layout_marginRight="45dp"
             android:layout_marginTop="6dp"
+            android:background="@drawable/button_style"
             android:text="@string/splash_screen_confirm"
-            android:textColor="@color/white"
-            android:background="@drawable/button_style"/>
+            android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

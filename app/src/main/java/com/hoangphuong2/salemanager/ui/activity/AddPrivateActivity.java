@@ -13,6 +13,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -241,16 +242,16 @@ public class AddPrivateActivity extends AppCompatActivity {
             canSave = false;
         if (etPhone.getText() == null || etPhone.getText().equals(""))
             canSave = false;
-        if ((!etPhone2.getText().equals("")
+        if ((!etPhone2.getText().toString().equals("")
                 && !etPhone2.getText().toString().matches(String.valueOf(Patterns.PHONE))))
             canSave = false;
-        if ((!etPhone3.getText().equals("")
+        if ((!etPhone3.getText().toString().equals("")
                 && !etPhone3.getText().toString().matches(String.valueOf(Patterns.PHONE))))
             canSave = false;
-        if ((!etPhone4.getText().equals("")
+        if ((!etPhone4.getText().toString().equals("")
                 && !etPhone4.getText().toString().matches(String.valueOf(Patterns.PHONE))))
             canSave = false;
-        if ((!etPhone5.getText().equals("")
+        if ((!etPhone5.getText().toString().equals("")
                 && !etPhone5.getText().toString().matches(String.valueOf(Patterns.PHONE))))
             canSave = false;
         if (!etPhone.getText().toString().matches(String.valueOf(Patterns.PHONE)))
@@ -281,27 +282,29 @@ public class AddPrivateActivity extends AppCompatActivity {
             DataUtil.phoneData.number = etPhone.getText().toString();
             listPhone.add(DataUtil.phoneData);
 
-            if (!etPhone2.getText().equals("")) {
+            if (!etPhone2.getText().toString().equals("")) {
                 DataUtil.phoneData.note = spNote2.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone2.getText().toString();
                 listPhone.add(DataUtil.phoneData);
             }
-            if (!etPhone3.getText().equals("")) {
+            if (!etPhone3.getText().toString().equals("")) {
                 DataUtil.phoneData.note = spNote3.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone3.getText().toString();
                 listPhone.add(DataUtil.phoneData);
             }
-            if (!etPhone4.getText().equals("")) {
+            if (!etPhone4.getText().toString().equals("")) {
                 DataUtil.phoneData.note = spNote4.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone4.getText().toString();
                 listPhone.add(DataUtil.phoneData);
             }
-            if (!etPhone5.getText().equals("")) {
+            if (!etPhone5.getText().toString().equals("")) {
                 DataUtil.phoneData.note = spNote5.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone5.getText().toString();
                 listPhone.add(DataUtil.phoneData);
             }
+            Log.e("Size",listPhone.size()+"");
             for (Phone phone : listPhone) {
+                Log.e("asdasd",phone.number);
                 contentValues = Database.getInstance().createPhone(phone);
                 Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PHONE);
             }

@@ -38,4 +38,8 @@
     <string name="import_from_contacts">Import from contacts</string>
     <string name="import_contact_success">Import contacts success !</string>
     <string name="chooser">Please choose phone number !</string>
+    <string name="name_emplty">Please input your name</string>
+    <string name="min_lenge">The minimum length is 3 characters</string>
+    <string name="max_lenge">The maximum length is 20 characters</string>
+    <string name="wrong_name">Input type a-z,A-Z</string>
 </resources>
