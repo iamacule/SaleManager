@@ -38,11 +38,11 @@
                 android:orientation="vertical">
 
                 <include
-                    android:id="inputName"
+                    android:id="@+id/inputName"
                     layout="@layout/input_text" />
 
                 <include
-                    android:id="inputAddress"
+                    android:id="@+id/inputAddress"
                     layout="@layout/input_text" />
 
                 <LinearLayout
@@ -52,21 +52,112 @@
                     android:orientation="horizontal">
 
                     <include
-                        android:id="inputPhone"
+                        android:id="@+id/inputPhone"
                         layout="@layout/input_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.7" />
+                        android:layout_weight="0.6" />
 
                     <ImageView
                         android:id="@+id/imgAdd"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.3" />
+                        android:layout_weight="0.4" />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/lnParentPhone2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <include
+                        android:id="@+id/inputPhone2"
+                        layout="@layout/input_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6" />
+
+                    <Spinner
+                        android:id="@+id/spPhone2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lnParentPhone3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <include
+                        android:id="@+id/inputPhone3"
+                        layout="@layout/input_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6" />
+
+                    <Spinner
+                        android:id="@+id/spPhone3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lnParentPhone4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <include
+                        android:id="@+id/inputPhone4"
+                        layout="@layout/input_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6" />
+
+                    <Spinner
+                        android:id="@+id/spPhone4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lnParentPhone5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <include
+                        android:id="@+id/inputPhone5"
+                        layout="@layout/input_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6" />
+
+                    <Spinner
+                        android:id="@+id/spPhone5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4" />
                 </LinearLayout>
 
                 <include
-                    android:id="inputEmail"
+                    android:id="@+id/inputEmail"
                     layout="@layout/input_text" />
 
                 <LinearLayout
@@ -102,7 +193,7 @@
                 </LinearLayout>
 
                 <include
-                    android:id="inputNote"
+                    android:id="@+id/inputNote"
                     layout="@layout/input_text" />
 
                 <LinearLayout

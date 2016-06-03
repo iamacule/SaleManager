@@ -41,5 +41,11 @@
     <string name="name_emplty">Please input your name</string>
     <string name="min_lenge">The minimum length is 3 characters</string>
     <string name="max_lenge">The maximum length is 20 characters</string>
-    <string name="wrong_name">Input type a-z,A-Z</string>
+    <string name="add_name_hint">Please input name</string>
+    <string name="add_mail_hint">Please input email</string>
+    <string name="add_address_hint">Please input address</string>
+    <string name="add_phone_hint">Please input phone</string>
+    <string name="add_note_hint">Please input note</string>
+    <string name="add_phone_error">The valid phone number is : 0-9</string>
+    <string name="add_mail_error">The valid email address is : abc@axz.xxx</string>
 </resources>

@@ -42,4 +42,11 @@
     <string name="min_lenge">Độ dài trên 3 ký tự</string>
     <string name="max_lenge">Độ dài dưới 20 ký tự</string>
     <string name="wrong_name">Nhập chữ cái từ a-z,A-Z</string>
+    <string name="add_name_hint">Vui lòng nhập tên</string>
+    <string name="add_mail_hint">Vui lòng nhập mail</string>
+    <string name="add_address_hint">Vui lòng nhập địa chỉ</string>
+    <string name="add_phone_hint">Vui lòng nhập số điện thoại</string>
+    <string name="add_note_hint">Vui lòng nhập ghi chú</string>
+    <string name="add_phone_error">Định đạng số điện thoại là : 0-9</string>
+    <string name="add_mail_error">Định dạng email là : abc@axz.xxx</string>
 </resources>

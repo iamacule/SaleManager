@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -36,6 +38,7 @@ import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
 import com.hoangphuong2.salemanager.util.DataUtil;
 import com.hoangphuong2.salemanager.util.PermissionUtil;
 import com.hoangphuong2.salemanager.ui.util.ResizeBitmap;
+import com.hoangphuong2.salemanager.util.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,24 +52,41 @@ public class AddPrivateActivity extends BaseActivity {
     private int sex = MALE;
     private ImageView imgAdd;
     private int addCount = 0;
-    private LinearLayout lnMorePhone2;
-    private LinearLayout lnMorePhone3;
-    private LinearLayout lnMorePhone4;
-    private LinearLayout lnMorePhone5;
-    private EditText etPhone;
+    private LinearLayout ipName;
+    private LinearLayout ipAddress;
+    private LinearLayout ipMail;
+    private LinearLayout ipNote;
+    private LinearLayout ipPhone;
+    private LinearLayout ipPhone2;
+    private LinearLayout ipPhone3;
+    private LinearLayout ipPhone4;
+    private LinearLayout ipPhone5;
+    private LinearLayout lnParentPhone2;
+    private LinearLayout lnParentPhone3;
+    private LinearLayout lnParentPhone4;
+    private LinearLayout lnParentPhone5;
     private EditText etName;
     private EditText etAddress;
     private EditText etMail;
     private EditText etNote;
+    private EditText etPhone;
     private EditText etPhone2;
     private EditText etPhone3;
     private EditText etPhone4;
     private EditText etPhone5;
-    private Spinner spNote;
-    private Spinner spNote2;
-    private Spinner spNote3;
-    private Spinner spNote4;
-    private Spinner spNote5;
+    private TextInputLayout txtName;
+    private TextInputLayout txtMail;
+    private TextInputLayout txtNote;
+    private TextInputLayout txtAddress;
+    private TextInputLayout txtHint;
+    private TextInputLayout txtHint2;
+    private TextInputLayout txtHint3;
+    private TextInputLayout txtHint4;
+    private TextInputLayout txtHint5;
+    private Spinner spPhone2;
+    private Spinner spPhone3;
+    private Spinner spPhone4;
+    private Spinner spPhone5;
     private ImageView imgLogo;
     private Bitmap bpAdd;
     private Button btnSave;
@@ -90,11 +110,6 @@ public class AddPrivateActivity extends BaseActivity {
     private void initLayout() {
         imgAdd = (ImageView) findViewById(R.id.imgAdd);
         imgLogo = (ImageView) findViewById(R.id.imgLogo);
-        etPhone = (EditText) findViewById(R.id.etPhone);
-        etAddress = (EditText) findViewById(R.id.etAddress);
-        etName = (EditText) findViewById(R.id.etName);
-        etNote = (EditText) findViewById(R.id.etNote);
-        etMail = (EditText) findViewById(R.id.etMail);
         btnSave = (Button) findViewById(R.id.btnSave);
         btnImport = (Button) findViewById(R.id.btnImport);
         radioMale = (RadioButton) findViewById(R.id.radioMale);
@@ -106,34 +121,83 @@ public class AddPrivateActivity extends BaseActivity {
         // Drop down layout style - list view with radio button
         dataSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        ipName = (LinearLayout) findViewById(R.id.inputName);
+        etName = (EditText) ipName.findViewById(R.id.et);
+        txtName = (TextInputLayout) ipName.findViewById(R.id.hint);
+        txtName.setHint(getString(R.string.add_name_hint));
+
+        ipAddress = (LinearLayout) findViewById(R.id.inputAddress);
+        etAddress = (EditText) ipAddress.findViewById(R.id.et);
+        txtAddress = (TextInputLayout) ipAddress.findViewById(R.id.hint);
+        txtAddress.setHint(getString(R.string.add_address_hint));
+
+        ipMail = (LinearLayout) findViewById(R.id.inputEmail);
+        etMail = (EditText) ipMail.findViewById(R.id.et);
+        etMail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        txtMail = (TextInputLayout) ipMail.findViewById(R.id.hint);
+        txtMail.setHint(getString(R.string.add_mail_hint));
+
+        ipPhone = (LinearLayout) findViewById(R.id.inputPhone);
+        etPhone = (EditText) ipPhone.findViewById(R.id.et);
+        etPhone.setInputType(InputType.TYPE_CLASS_PHONE);
+        txtHint = (TextInputLayout) ipPhone.findViewById(R.id.hint);
+        txtHint.setHint(getString(R.string.add_phone_hint));
+
+        ipPhone2 = (LinearLayout) findViewById(R.id.inputPhone2);
+        etPhone2 = (EditText) ipPhone2.findViewById(R.id.et);
+        etPhone2.setInputType(InputType.TYPE_CLASS_PHONE);
+        txtHint2 = (TextInputLayout) ipPhone2.findViewById(R.id.hint);
+        txtHint2.setHint(getString(R.string.add_phone_hint));
+
+        ipPhone3 = (LinearLayout) findViewById(R.id.inputPhone3);
+        etPhone3 = (EditText) ipPhone3.findViewById(R.id.et);
+        etPhone3.setInputType(InputType.TYPE_CLASS_PHONE);
+        txtHint3 = (TextInputLayout) ipPhone3.findViewById(R.id.hint);
+        txtHint3.setHint(getString(R.string.add_phone_hint));
+
+        ipPhone4 = (LinearLayout) findViewById(R.id.inputPhone4);
+        etPhone4 = (EditText) ipPhone4.findViewById(R.id.et);
+        etPhone4.setInputType(InputType.TYPE_CLASS_PHONE);
+        txtHint4 = (TextInputLayout) ipPhone4.findViewById(R.id.hint);
+        txtHint4.setHint(getString(R.string.add_phone_hint));
+
+        ipPhone5 = (LinearLayout) findViewById(R.id.inputPhone5);
+        etPhone5 = (EditText) ipPhone5.findViewById(R.id.et);
+        etPhone5.setInputType(InputType.TYPE_CLASS_PHONE);
+        txtHint5 = (TextInputLayout) ipPhone5.findViewById(R.id.hint);
+        txtHint5.setHint(getString(R.string.add_phone_hint));
+
+        ipNote = (LinearLayout) findViewById(R.id.inputNote);
+        etNote = (EditText) ipNote.findViewById(R.id.et);
+        txtNote = (TextInputLayout) ipNote.findViewById(R.id.hint);
+        txtNote.setHint(getString(R.string.add_note_hint));
+
+        spPhone2 = (Spinner) findViewById(R.id.spPhone2);
+        spPhone3 = (Spinner) findViewById(R.id.spPhone3);
+        spPhone4 = (Spinner) findViewById(R.id.spPhone4);
+        spPhone5 = (Spinner) findViewById(R.id.spPhone5);
+
+        lnParentPhone2 = (LinearLayout) findViewById(R.id.lnParentPhone2);
+        lnParentPhone3 = (LinearLayout) findViewById(R.id.lnParentPhone3);
+        lnParentPhone4 = (LinearLayout) findViewById(R.id.lnParentPhone4);
+        lnParentPhone5 = (LinearLayout) findViewById(R.id.lnParentPhone5);
+
         // attaching data adapter to spinner
-        spNote = (Spinner) findViewById(R.id.spNote);
-        spNote.setAdapter(dataSpinner);
-        spNote.setSelection(1);
+        spPhone2.setAdapter(dataSpinner);
+        spPhone2.setSelection(1);
 
-        lnMorePhone2 = (LinearLayout) findViewById(R.id.lnMorePhone2);
-        etPhone2 = (EditText) findViewById(R.id.etPhone2);
-        spNote2 = (Spinner) findViewById(R.id.spNote2);
-        spNote2.setAdapter(dataSpinner);
-        spNote2.setSelection(1);
+        // attaching data adapter to spinner
+        spPhone3.setAdapter(dataSpinner);
+        spPhone3.setSelection(1);
 
-        lnMorePhone3 = (LinearLayout) findViewById(R.id.lnMorePhone3);
-        etPhone3 = (EditText) findViewById(R.id.etPhone3);
-        spNote3 = (Spinner) findViewById(R.id.spNote3);
-        spNote3.setAdapter(dataSpinner);
-        spNote3.setSelection(1);
+        // attaching data adapter to spinner
+        spPhone4.setAdapter(dataSpinner);
+        spPhone4.setSelection(1);
 
-        lnMorePhone4 = (LinearLayout) findViewById(R.id.lnMorePhone4);
-        etPhone4 = (EditText) findViewById(R.id.etPhone4);
-        spNote4 = (Spinner) findViewById(R.id.spNote4);
-        spNote4.setAdapter(dataSpinner);
-        spNote4.setSelection(1);
+        // attaching data adapter to spinner
+        spPhone5.setAdapter(dataSpinner);
+        spPhone5.setSelection(1);
 
-        lnMorePhone5 = (LinearLayout) findViewById(R.id.lnMorePhone5);
-        etPhone5 = (EditText) findViewById(R.id.etPhone5);
-        spNote5 = (Spinner) findViewById(R.id.spNote5);
-        spNote5.setAdapter(dataSpinner);
-        spNote5.setSelection(1);
     }
 
     private void startImportContactsAsyncTask() {
@@ -232,34 +296,58 @@ public class AddPrivateActivity extends BaseActivity {
     }
 
     private void saveData() {
-        boolean canSave = true;
-        if (etName.getText() == null || etName.getText().equals(""))
-            canSave = false;
-        if (etAddress.getText() == null || etAddress.getText().equals(""))
-            canSave = false;
-        if (etMail.getText() == null || etMail.getText().equals(""))
-            canSave = false;
-        if (etPhone.getText() == null || etPhone.getText().equals(""))
-            canSave = false;
-        if ((!etPhone2.getText().toString().equals("")
-                && !etPhone2.getText().toString().matches(String.valueOf(Patterns.PHONE))))
-            canSave = false;
-        if ((!etPhone3.getText().toString().equals("")
-                && !etPhone3.getText().toString().matches(String.valueOf(Patterns.PHONE))))
-            canSave = false;
-        if ((!etPhone4.getText().toString().equals("")
-                && !etPhone4.getText().toString().matches(String.valueOf(Patterns.PHONE))))
-            canSave = false;
-        if ((!etPhone5.getText().toString().equals("")
-                && !etPhone5.getText().toString().matches(String.valueOf(Patterns.PHONE))))
-            canSave = false;
-        if (!etPhone.getText().toString().matches(String.valueOf(Patterns.PHONE)))
-            canSave = false;
-        if (!etMail.getText().toString().matches(String.valueOf(Patterns.EMAIL_ADDRESS)))
-            canSave = false;
+        if (etName.getText().toString().trim().equals("")) {
+            txtName.setError(null);
+            txtName.setError(getString(R.string.name_emplty));
+            etName.requestFocus();
+        } else if (etName.getText().toString().trim().length() < 3) {
+            txtName.setError(getString(R.string.min_lenge));
+            etName.requestFocus();
 
-        if (canSave) {
-            listPhone.clear();
+        } else if (etName.getText().toString().trim().length() > 20) {
+            txtName.setError(getString(R.string.max_lenge));
+            etName.requestFocus();
+        } else if (etAddress.getText().toString().trim().equals("")) {
+            txtAddress.setError(null);
+            txtAddress.setError(getString(R.string.add_address_hint));
+            etAddress.requestFocus();
+        } else if (etMail.getText().toString().trim().equals("")) {
+            txtMail.setError(null);
+            txtMail.setError(getString(R.string.add_mail_hint));
+            etMail.requestFocus();
+        } else if (!etMail.getText().toString().trim().matches(String.valueOf(Patterns.EMAIL_ADDRESS))) {
+            txtMail.setError(null);
+            txtMail.setError(getString(R.string.add_mail_error));
+            etMail.requestFocus();
+        } else if (etPhone.getText().toString().trim().equals("")) {
+            txtHint.setError(null);
+            txtHint.setError(getString(R.string.add_phone_hint));
+            etPhone.requestFocus();
+        } else if (!etPhone.getText().toString().trim().matches(String.valueOf(Patterns.PHONE))) {
+            txtHint.setError(null);
+            txtHint.setError(getString(R.string.add_phone_error));
+            etPhone.requestFocus();
+        } else if (lnParentPhone2.getVisibility() == View.VISIBLE &&
+                !etPhone2.getText().toString().trim().matches(String.valueOf(Patterns.PHONE))) {
+            txtHint2.setError(null);
+            txtHint2.setError(getString(R.string.add_phone_error));
+            etPhone2.requestFocus();
+        } else if (lnParentPhone3.getVisibility() == View.VISIBLE &&
+                !etPhone3.getText().toString().trim().matches(String.valueOf(Patterns.PHONE))) {
+            txtHint3.setError(null);
+            txtHint3.setError(getString(R.string.add_phone_error));
+            etPhone3.requestFocus();
+        } else if (lnParentPhone4.getVisibility() == View.VISIBLE &&
+                !etPhone4.getText().toString().trim().matches(String.valueOf(Patterns.PHONE))) {
+            txtHint4.setError(null);
+            txtHint4.setError(getString(R.string.add_phone_error));
+            etPhone4.requestFocus();
+        } else if (lnParentPhone5.getVisibility() == View.VISIBLE &&
+                !etPhone5.getText().toString().trim().matches(String.valueOf(Patterns.PHONE))) {
+            txtHint5.setError(null);
+            txtHint5.setError(getString(R.string.add_phone_error));
+            etPhone5.requestFocus();
+        } else {
             Database.getInstance().open();
             //Create and insert Person
             DataUtil.personData = new Person();
@@ -277,64 +365,63 @@ public class AddPrivateActivity extends BaseActivity {
             DataUtil.phoneData.idPerson = DataUtil.personData.idPerson;
             DataUtil.phoneData.isCompany = 0;
             DataUtil.phoneData.idCompany = 0;
-            DataUtil.phoneData.note = spNote.getSelectedItemPosition();
+            DataUtil.phoneData.note = 0;
             DataUtil.phoneData.number = etPhone.getText().toString();
             listPhone.add(DataUtil.phoneData);
 
-            if (!etPhone2.getText().toString().equals("")) {
-                DataUtil.phoneData.note = spNote2.getSelectedItemPosition();
+            if (lnParentPhone2.getVisibility() == View.VISIBLE) {
+                DataUtil.phoneData.note = spPhone2.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone2.getText().toString();
                 listPhone.add(DataUtil.phoneData);
             }
-            if (!etPhone3.getText().toString().equals("")) {
-                DataUtil.phoneData.note = spNote3.getSelectedItemPosition();
+            if (lnParentPhone3.getVisibility() == View.VISIBLE) {
+                DataUtil.phoneData.note = spPhone3.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone3.getText().toString();
                 listPhone.add(DataUtil.phoneData);
             }
-            if (!etPhone4.getText().toString().equals("")) {
-                DataUtil.phoneData.note = spNote4.getSelectedItemPosition();
+            if (lnParentPhone4.getVisibility() == View.VISIBLE) {
+                DataUtil.phoneData.note = spPhone4.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone4.getText().toString();
                 listPhone.add(DataUtil.phoneData);
             }
-            if (!etPhone5.getText().toString().equals("")) {
-                DataUtil.phoneData.note = spNote5.getSelectedItemPosition();
+            if (lnParentPhone5.getVisibility() == View.VISIBLE) {
+                DataUtil.phoneData.note = spPhone5.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone5.getText().toString();
                 listPhone.add(DataUtil.phoneData);
             }
-            Log.e("Size",listPhone.size()+"");
+            Log.e(Tag.AddPrivateActivity, "Size list phone : " + listPhone.size());
             for (Phone phone : listPhone) {
-                Log.e("asdasd",phone.number);
+                Log.e(Tag.AddPrivateActivity, phone.number + " added");
                 contentValues = Database.getInstance().createPhone(phone);
                 Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PHONE);
             }
             Database.getInstance().close();
             DataUtil.needAddNew = true;
             onBackPressed();
-        } else {
-            Boast.makeText(AddPrivateActivity.this, "Data wrong !!").show();
         }
     }
 
     private void addPhoneButton() {
+        Log.d(Tag.AddPrivateActivity, "Add phone clicked");
         switch (addCount) {
             case 0:
-                lnMorePhone2.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
-                lnMorePhone2.setVisibility(View.VISIBLE);
+                lnParentPhone2.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
+                lnParentPhone2.setVisibility(View.VISIBLE);
                 addCount++;
                 break;
             case 1:
-                lnMorePhone3.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
-                lnMorePhone3.setVisibility(View.VISIBLE);
+                lnParentPhone3.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
+                lnParentPhone3.setVisibility(View.VISIBLE);
                 addCount++;
                 break;
             case 2:
-                lnMorePhone4.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
-                lnMorePhone4.setVisibility(View.VISIBLE);
+                lnParentPhone4.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
+                lnParentPhone4.setVisibility(View.VISIBLE);
                 addCount++;
                 break;
             case 3:
-                lnMorePhone5.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
-                lnMorePhone5.setVisibility(View.VISIBLE);
+                lnParentPhone5.startAnimation(AnimationUtil.slideInTop(AddPrivateActivity.this));
+                lnParentPhone5.setVisibility(View.VISIBLE);
                 addCount++;
                 break;
         }

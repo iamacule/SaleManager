@@ -15,11 +15,9 @@ public class Person {
     public String note;
     public int sex;
     public int idCompany;
-    public List<Phone> listPhone;
+    public List<Phone> listPhone = new ArrayList<>();
 
-    public Person() {
-        listPhone = new ArrayList<>();
-    }
+    public Person() {}
 
     public Person(int idPerson, String name, String address, String email, String note, int sex, int idCompany, List<Phone> listPhone) {
         this.idPerson = idPerson;

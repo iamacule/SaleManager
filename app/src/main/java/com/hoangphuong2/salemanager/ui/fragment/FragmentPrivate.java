@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,12 @@ import android.widget.TextView;
 import com.hoangphuong2.salemanager.R;
 import com.hoangphuong2.salemanager.data.sqlite.Database;
 import com.hoangphuong2.salemanager.model.Person;
+import com.hoangphuong2.salemanager.model.Phone;
 import com.hoangphuong2.salemanager.ui.activity.MainActivity;
 import com.hoangphuong2.salemanager.ui.adapter.list.DataAdapter;
 import com.hoangphuong2.salemanager.ui.util.AnimationUtil;
 import com.hoangphuong2.salemanager.util.DataUtil;
+import com.hoangphuong2.salemanager.util.Tag;
 
 import java.util.Collections;
 import java.util.List;
@@ -50,6 +53,12 @@ public class FragmentPrivate extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         Database.getInstance().open();
         listData = Database.getInstance().getAllPerson();
+        for (Person person : listData){
+            Log.d(Tag.FragmentPrivate,person.idPerson+"");
+            for (Phone phone : person.listPhone){
+                Log.d(Tag.FragmentPrivate,"# :"+phone.number);
+            }
+        }
         Collections.sort(listData, Person.COMPARE_BY_NAME);
         Database.getInstance().close();
         showHideNodata(listData.size());
