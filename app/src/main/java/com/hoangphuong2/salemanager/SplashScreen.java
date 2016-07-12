@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.hoangphuong2.salemanager.data.preferences.Preferences;
 import com.hoangphuong2.salemanager.data.sqlite.Database;
+import com.hoangphuong2.salemanager.ui.activity.BaseActivity;
 import com.hoangphuong2.salemanager.ui.activity.MainActivity;
 import com.hoangphuong2.salemanager.ui.activity.StartActivity;
 import com.hoangphuong2.salemanager.util.DataUtil;
@@ -19,19 +20,37 @@ import com.hoangphuong2.salemanager.ui.util.ResizeBitmap;
 import com.hoangphuong2.salemanager.ui.util.ScreenUtil;
 import com.hoangphuong2.salemanager.util.Tag;
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreen extends BaseActivity {
     private String ownerName;
     private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
-        initValue();
-        initActivity();
     }
 
-    private void initValue() {
+    private void initActivity() {
+        if (ownerName != null) {
+            goToActivity(MainActivity.class);
+            Log.d(Tag.SplashScreen, "Name is config,go to Main");
+        } else {
+            goToActivity(StartActivity.class);
+            Log.d(Tag.SplashScreen, "Name is not config,go to Start");
+        }
+    }
+
+    @Override
+    public void identifyLayout() {
+
+    }
+
+    @Override
+    public void identityValue() {
+
+    }
+
+    @Override
+    public void identityAction() {
         ownerName = Preferences.getInstance(getApplicationContext()).getStringValue(Preferences.SALE_MANAGER_OWNER_NAME);
         Thread prepareDataThread = new Thread(new Runnable() {
             @Override
@@ -50,17 +69,11 @@ public class SplashScreen extends AppCompatActivity {
             }
         });
         prepareDataThread.start();
+        initActivity();
     }
 
-    private void initActivity() {
-        if (ownerName != null) {
-            intent = new Intent(this, MainActivity.class);
-            Log.d(Tag.SplashScreen, "Name is config,go to Main");
-        } else {
-            intent = new Intent(this, StartActivity.class);
-            Log.d(Tag.SplashScreen, "Name is not config,go to Start");
-        }
-        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        startActivity(intent);
+    @Override
+    protected int getLayout() {
+        return (R.layout.activity_splash_screen);
     }
 }

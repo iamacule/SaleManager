@@ -75,9 +75,7 @@ public class StartActivity extends BaseActivity {
         } else {
             Preferences.getInstance(getApplicationContext()).storeValue(Preferences.SALE_MANAGER_OWNER_NAME, etName.getText().toString());
             Boast.makeText(this, getString(R.string.toast_save_success)).show();
-            Intent intent = new Intent(this, MainActivity.class);
-            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-            startActivity(intent);
+            goToActivity(MainActivity.class);
         }
     }
 

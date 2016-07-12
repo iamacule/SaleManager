@@ -296,6 +296,7 @@ public class AddPrivateActivity extends BaseActivity {
     }
 
     private void saveData() {
+        listPhone.clear();
         if (etName.getText().toString().trim().equals("")) {
             txtName.setError(null);
             txtName.setError(getString(R.string.name_emplty));
@@ -372,21 +373,25 @@ public class AddPrivateActivity extends BaseActivity {
             if (lnParentPhone2.getVisibility() == View.VISIBLE) {
                 DataUtil.phoneData.note = spPhone2.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone2.getText().toString();
+                Log.d(Tag.AddPrivateActivity,"Phone number 2 : "+DataUtil.phoneData.number);
                 listPhone.add(DataUtil.phoneData);
             }
             if (lnParentPhone3.getVisibility() == View.VISIBLE) {
                 DataUtil.phoneData.note = spPhone3.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone3.getText().toString();
+                Log.d(Tag.AddPrivateActivity,"Phone number 3 : "+DataUtil.phoneData.number);
                 listPhone.add(DataUtil.phoneData);
             }
             if (lnParentPhone4.getVisibility() == View.VISIBLE) {
                 DataUtil.phoneData.note = spPhone4.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone4.getText().toString();
+                Log.d(Tag.AddPrivateActivity,"Phone number 4 : "+DataUtil.phoneData.number);
                 listPhone.add(DataUtil.phoneData);
             }
             if (lnParentPhone5.getVisibility() == View.VISIBLE) {
                 DataUtil.phoneData.note = spPhone5.getSelectedItemPosition();
                 DataUtil.phoneData.number = etPhone5.getText().toString();
+                Log.d(Tag.AddPrivateActivity,"Phone number 5 : "+DataUtil.phoneData.number);
                 listPhone.add(DataUtil.phoneData);
             }
             Log.e(Tag.AddPrivateActivity, "Size list phone : " + listPhone.size());
@@ -395,6 +400,7 @@ public class AddPrivateActivity extends BaseActivity {
                 contentValues = Database.getInstance().createPhone(phone);
                 Database.getInstance().insert(contentValues, Database.getInstance().DATABASE_TABLE_PHONE);
             }
+            DataUtil.personData.listPhone = listPhone;
             Database.getInstance().close();
             DataUtil.needAddNew = true;
             onBackPressed();

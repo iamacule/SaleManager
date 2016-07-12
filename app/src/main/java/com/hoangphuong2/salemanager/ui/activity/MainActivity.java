@@ -39,8 +39,7 @@ public class MainActivity extends BaseActivity {
                     case R.id.fab:
                         switch (DataUtil.current_fragment) {
                             case DataUtil.PRIVATE:
-                                intent = new Intent(MainActivity.this, AddPrivateActivity.class);
-                                startActivity(intent);
+                                goToActivity(AddPrivateActivity.class);
                                 break;
                             case DataUtil.COMPANY:
 

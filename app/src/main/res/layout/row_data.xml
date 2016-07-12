@@ -43,7 +43,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|center"
                 android:paddingLeft="@dimen/data_text_padding"
-                android:text="@string/app_name"
                 android:textColor="@color/grey_900"
                 android:textSize="@dimen/data_text_size" />
 
